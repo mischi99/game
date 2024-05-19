@@ -115,3 +115,4 @@ reset_game()
 
 zurücksetzen()  
 pgzrun.go()
+gugus
