@@ -45,9 +45,10 @@ def draw():
         screen.blit("mashrooms", (0, 0)) #fügt hintergrundbild mashrooms ein.
         squirrel.draw()
         screen.blit("mashrooms1", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
+        screen.blit("mashrooms2", (0, 0))
         speechbubble.draw()
         black = 0, 0, 0
-        screen.draw.text("Hallo\n> weiter mit\nTabulatortaste :)", left=385, top=550, fontsize=23, color=black, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey!\n> Weiter mit\nTabulatortaste :)", left=385, top=550, fontsize=23, color=black, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
     
 def update():
@@ -64,7 +65,6 @@ def update():
     if startgame:
         movebackground()
         
-    
 def movebackground():
     background.x = background.x -3  #bewegt den Hintergrund um 5 Pixel nach links --> erzeugen des Laufeffekts
     background1.x = background1.x -3
