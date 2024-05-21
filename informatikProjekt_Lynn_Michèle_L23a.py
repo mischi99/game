@@ -9,12 +9,12 @@ TITLE = "Informatik Projekt - Designed by Lynn and Michèle"
 
 #squirrel
 squirrel = Actor("squirrel1.png")
-squirrel.x = 400
+squirrel.x = 200
 squirrel.y = 775
 
 #speech bubble
 speechbubble = Actor("speechbubble.png")
-speechbubble.x = 650
+speechbubble.x = 450
 speechbubble.y = 600
 
 #background
@@ -42,12 +42,13 @@ def draw():
         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="center", italic=True, )
     
     if not introfinished: #prüft ob not introfinished gleich false ist, was in diesem Fall stimmt --> not introfinished wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("firstbackground", (0, 0)) #fügt hintergrundbild mashrooms ein.
+        screen.blit("mashrooms", (0, 0)) #fügt hintergrundbild mashrooms ein.
         squirrel.draw()
-        screen.blit("flower", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
+        screen.blit("mashrooms1", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
+        screen.blit("mashrooms2", (0, 0))
         speechbubble.draw()
         black = 0, 0, 0
-        screen.draw.text("Hey!\n> Weiter mit\nTabulatortaste :)", left=575, top=550, fontsize=23, color=black, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey!\n> Weiter mit\nTabulatortaste :)", left=385, top=550, fontsize=23, color=black, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
     
 def update():
