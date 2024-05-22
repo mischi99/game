@@ -47,7 +47,7 @@ def draw():
         screen.blit("flower", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
         speechbubble.draw()
         black = 0, 0, 0
-        screen.draw.text("Hey!\n> Weiter mit\nTabulatortaste :)", left=575, top=550, fontsize=23, color=black, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey!\n> Weiter mit\nTabulatortaste :)", left=575, top=550, fontsize=23, color=black, fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
     
 def update():
