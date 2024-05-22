@@ -38,8 +38,8 @@ def draw():
             
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
-        screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=white, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="center", )
-        screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="C:\\githubprojects\\game\\fonts\\handlee-regular.ttf", align="center", italic=True, )
+        screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", )
+        screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
     
     if not introfinished: #prüft ob not introfinished gleich false ist, was in diesem Fall stimmt --> not introfinished wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("firstbackground", (0, 0)) #fügt hintergrundbild mashrooms ein.
