@@ -49,10 +49,12 @@ background.x = 0
 background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
-hhaa = Actor("hhaa1.png")
-background.x = 0
-hhaa1 = Actor("hhaa1.png")
+hhaa = Actor("bridgenewnew.png")
+hhaa.x = 0
+hhaa1 = Actor("bridgenewnewvorne.png")
+hhaa2 = Actor("bridgenewnew.png")
 hhaa1.x = WIDTH
+
 
 #intro
 introfinished1 = False
@@ -72,7 +74,10 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-    hhaa.draw()
+    hhaa2.draw()
+    squirrel.draw()
+    hhaa1.draw()
+    
             
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
@@ -144,20 +149,20 @@ def update():
         movebackground()
         
 def movebackground():
-    background.x = background.x -3  #bewegt den Hintergrund um 5 Pixel nach links --> erzeugen des Laufeffekts
+    background.x = background.x -3
     background1.x = background1.x -3
     
-    if background.right < 0:  #wenn der Hintergrund aus dem Bild heraus ist
-        background.left = background1.right  #setzt ihn wieder zurück auf die rechte Seite des Bildschirms --> so entsteht eine Dauerschleife
+    if background.right < 0:
+        background.left = background1.right
     if background1.right < 0:
         background1.left = background.right
     
-    hhaa.x = hhaa.x -3  #bewegt den Hintergrund um 5 Pixel nach links --> erzeugen des Laufeffekts
     hhaa1.x = hhaa1.x -3
+    hhaa2.x = hhaa2.x -3
     
-    if hhaa.right < 0:  #wenn der Hintergrund aus dem Bild heraus ist
-        hhaa.left = hhaa1.right  #setzt ihn wieder zurück auf die rechte Seite des Bildschirms --> so entsteht eine Dauerschleife
     if hhaa1.right < 0:
-        hhaa1.left = hhaa.right
+        hhaa1.left = hhaa2.right
+    if hhaa2.right < 0:
+        hhaa2.left = hhaa1.right
 music()
 pgzrun.go()
