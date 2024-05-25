@@ -49,10 +49,10 @@ background.x = 0
 background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
-hhaa = Actor("bridgenewnew.png")
+hhaa = Actor("bridge1.png")
 hhaa.x = 0
-hhaa1 = Actor("bridgenewnewvorne.png")
-hhaa2 = Actor("bridgenewnew.png")
+hhaa1 = Actor("bridge2.png")
+hhaa2 = Actor("bridge1.png")
 hhaa1.x = WIDTH
 
 
