@@ -28,6 +28,11 @@ speechbubblemirrored = Actor("speechbubblemirrored.png")
 speechbubblemirrored.x = 1450
 speechbubblemirrored.y = 600
 
+#troll
+troll = Actor("troll2.png")
+troll.x = 1700
+troll.y = 775
+
 #background
 background = Actor("background.jpg")
 background.x = 0
@@ -41,6 +46,7 @@ hhaa1.x = WIDTH
 #intro
 introfinished1 = False
 introfinished2 = False
+introfinished3 = False
 
 #start
 startgame = False
@@ -66,28 +72,43 @@ def draw():
         squirrel.draw()
         screen.blit("flower", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
         speechbubble.draw()
-        screen.draw.text("Hey!\n> Weiter mit\nTabulatortaste :)", left=575, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey, Weisst du wo Elena die Fee steckt, hast du sie gesehen?\n> Weiter mit\nTabulatortaste :)", left=575, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("background2", (0, 0))
-        squirrelmirrored.draw()
+        screen.blit("firstbackground", (0, 0))
+        troll.draw()
         speechbubblemirrored.draw()
-        screen.draw.text("Hey!\n> Weiter mit\nm-Taste", left=1375, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
+        screen.draw.text("Nein, ich habe sie nicht gesehen, ich gehe sie suchen!\n> Weiter mit\nm-Taste", left=1375, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+     
+    elif not introfinished3: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+        screen.blit("firstbackground", (0, 0))
+        squirrel.draw()
+        speechbubble.draw()
+        screen.draw.text("Okay ich bleibe hier!\n> Weiter mit\nx-Taste", left=575, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+
 def update():
-    global introfinished1, introfinished2, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf
+    global introfinished1, introfinished2, introfinished3, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf
     
-    if keyboard.tab and not introfinished1 and not introfinished2: #wenn die tabulatortaste gedrückt wird und das intro noch nicht fertig ist dann soll der Starttext noch nicht angezeigt werden.
+    if keyboard.tab and not introfinished1 and not introfinished2 and not introfinished3: #wenn die tabulatortaste gedrückt wird und das intro noch nicht fertig ist dann soll der Starttext noch nicht angezeigt werden.
         introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
         introfinished2 = False
+        introfinished3 = False
         starttext = True
         
-    if keyboard.m and introfinished1 and not introfinished2 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+    if keyboard.m and introfinished1 and not introfinished2 and not introfinished3 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
         introfinished1 = True
         introfinished2 = True
+        introfinished3 = False
         startgame = False
-        starttext = True 
-    
+        starttext = True
+        
+    if keyboard.x and introfinished1 and  introfinished2 and not introfinished3 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+        introfinished1 = True
+        introfinished2 = True
+        introfinished3 = True
+        startgame = False
+        starttext = True
+        
     if keyboard.space and introfinished1 and  introfinished2 and not startgame:
         startgame = True #das Intro wird somit beendet
         starttext = False #der Starttext wird somit angezeigt
@@ -113,4 +134,3 @@ def movebackground():
         hhaa1.left = hhaa.right
 music()
 pgzrun.go()
-
