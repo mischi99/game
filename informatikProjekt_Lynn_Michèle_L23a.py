@@ -51,10 +51,12 @@ background1.x = WIDTH
 
 bridge = Actor("bridge1.png")
 bridge.x = 0
-bridge3 = Actor ("bridge2.png")
-bridge1 = Actor("bridge2.png")
+bridge1 = Actor ("bridge2.png")
 bridge1.x = WIDTH
-bridge2 = Actor("bridge1.png")
+bridge2 = Actor("bridge2.png")
+bridge2.x = 0
+bridge3 = Actor("bridge1.png")
+bridge3.x = WIDTH
 
 test = Actor("test.png")
 test.x = 100
@@ -78,12 +80,12 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-    bridge2.draw()
     bridge.draw()
+    bridge3.draw()
     test.draw()
-    bridge1.draw()
-    bridge3.draw()    
-            
+    bridge1.draw()   
+    bridge2.draw()
+    
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
         screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", )
@@ -169,10 +171,13 @@ def movebackground():
 
     if bridge.right < 0:
         bridge.left = bridge1.right
+            
     if bridge1.right < 0:
         bridge1.left = bridge2.right
+        
     if bridge1.right < 0:
-        bridge1.left = bridge.right 
+        bridge1.left = bridge.right
+
           
 music()
 pgzrun.go()
