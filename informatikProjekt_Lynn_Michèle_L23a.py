@@ -49,12 +49,16 @@ background.x = 0
 background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
-hhaa = Actor("bridge1.png")
-hhaa.x = 0
-hhaa1 = Actor("bridge2.png")
-hhaa2 = Actor("bridge1.png")
-hhaa1.x = WIDTH
+bridge = Actor("bridge1.png")
+bridge.x = 0
+bridge3 = Actor ("bridge2.png")
+bridge1 = Actor("bridge2.png")
+bridge1.x = WIDTH
+bridge2 = Actor("bridge1.png")
 
+test = Actor("test.png")
+test.x = 100
+test.y = 640
 
 #intro
 introfinished1 = False
@@ -74,10 +78,11 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-    hhaa2.draw()
-    squirrel.draw()
-    hhaa1.draw()
-    
+    bridge2.draw()
+    bridge.draw()
+    test.draw()
+    bridge1.draw()
+    bridge3.draw()    
             
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
@@ -157,12 +162,17 @@ def movebackground():
     if background1.right < 0:
         background1.left = background.right
     
-    hhaa1.x = hhaa1.x -3
-    hhaa2.x = hhaa2.x -3
-    
-    if hhaa1.right < 0:
-        hhaa1.left = hhaa2.right
-    if hhaa2.right < 0:
-        hhaa2.left = hhaa1.right
+    bridge.x = bridge.x - 3
+    bridge3.x = bridge3.x - 3
+    bridge1.x = bridge1.x - 3
+    bridge2.x = bridge2.x - 3
+
+    if bridge.right < 0:
+        bridge.left = bridge1.right
+    if bridge1.right < 0:
+        bridge1.left = bridge2.right
+    if bridge1.right < 0:
+        bridge1.left = bridge.right 
+          
 music()
 pgzrun.go()
