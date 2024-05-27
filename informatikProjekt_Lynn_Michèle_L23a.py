@@ -131,39 +131,73 @@ def draw():
 
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf
-    
-    if keyboard.tab and not introfinished1 and not introfinished2 and not introfinished3: #wenn die tabulatortaste gedrückt wird und das intro noch nicht fertig ist dann soll der Starttext noch nicht angezeigt werden.
-        introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
-        introfinished2 = False
-        introfinished3 = False
-        starttext = True
-        
-    if keyboard.m and introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-        introfinished1 = True
-        introfinished2 = True
-        introfinished3 = False
-        startgame = False
-        starttext = True
-        
-    if keyboard.x and introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-        introfinished1 = True
-        introfinished2 = True
-        introfinished3 = True
-        introfinished4 = False 
-        startgame = False
-        starttext = False
-        
-    if keyboard.y and introfinished1 and introfinished2 and introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-        introfinished1 = True
-        introfinished2 = True
-        introfinished3 = True
-        introfinished4 = True
-        startgame = False
-        starttext = True
+   
+   if keyboard.tab:
+        if not introfinished1 and not introfinished2 and not introfinished3:
+            introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
+            introfinished2 = False
+            introfinished3 = False
+            starttext = True
+            
+        elif  introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+            introfinished1 = True
+            introfinished2 = True
+            introfinished3 = False
+            startgame = False
+            starttext = True
+            
+        elif introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+            introfinished1 = True
+            introfinished2 = True
+            introfinished3 = True
+            introfinished4 = False 
+            startgame = False
+            starttext = False
+            
+        elif introfinished1 and introfinished2 and introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+            introfinished1 = True
+            introfinished2 = True
+            introfinished3 = True
+            introfinished4 = True
+            startgame = False
+            starttext = True
         
     if keyboard.space and introfinished1 and introfinished2 and introfinished3 and not startgame:
         startgame = True #das Intro wird somit beendet
-        starttext = False #der Starttext wird somit angezeigt
+        starttext = False #der Starttext wird somit angezeigt    
+   
+#     if keyboard.tab and not introfinished1 and not introfinished2 and not introfinished3: #wenn die tabulatortaste gedrückt wird und das intro noch nicht fertig ist dann soll der Starttext noch nicht angezeigt werden.
+#         introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
+#         introfinished2 = False
+#         introfinished3 = False
+#         starttext = True
+        
+#     if keyboard.m and introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+#         introfinished1 = True
+#         introfinished2 = True
+#         introfinished3 = False
+#         startgame = False
+#         starttext = True
+        
+#     if keyboard.x and introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+#         introfinished1 = True
+#         introfinished2 = True
+#         introfinished3 = True
+#         introfinished4 = False 
+#         startgame = False
+#         starttext = False
+        
+#     if keyboard.y and introfinished1 and introfinished2 and introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+#         introfinished1 = True
+#         introfinished2 = True
+#         introfinished3 = True
+#         introfinished4 = True
+#         startgame = False
+#         starttext = True
+        
+#     if keyboard.space and introfinished1 and introfinished2 and introfinished3 and not startgame:
+#         startgame = True #das Intro wird somit beendet
+#         starttext = False #der Starttext wird somit angezeigt
 
     if startgame:
         movebackground()
@@ -196,7 +230,7 @@ def movebackground():
         
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if test.image == "mensch1.png":
+    if test.image = "mensch1.png":
         test.image = "mensch2.png"
         time.sleep(0.1)
     else:
