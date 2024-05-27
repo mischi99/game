@@ -3,6 +3,7 @@ import os
 os.environ["SDL_VIDEO_CENTERED"] = "0, 35"
 os.environ["SDL_VIDEO_FULLSCREEN_DISPLAY"] = "0"
 
+import time
 import pgzrun
 WIDTH = 1920
 HEIGHT = 985
@@ -68,9 +69,9 @@ bridge2.x = 0
 bridge3 = Actor("bridge1.png")
 bridge3.x = WIDTH
 
-test = Actor("test.png")
+test = Actor("mensch1.png")
 test.x = 100
-test.y = 640
+test.y = 540
 
 #intro
 introfinished1 = False
@@ -93,6 +94,7 @@ def draw():
     bridge.draw()
     bridge3.draw()
     test.draw()
+    kostuemwechseln()
     bridge1.draw()   
     bridge2.draw()
 
@@ -191,6 +193,15 @@ def movebackground():
         
     if bridge3.right < 0:
         bridge3.left = bridge2.right
+        
+# Kostümwechsel zwischen mensch1 und mensch2
+def kostuemwechseln():
+    if test.image == "mensch1.png":
+        test.image = "mensch2.png"
+        time.sleep(0.1)
+    else:
+        test.image = "mensch1.png"
+        time.sleep(0.1)
           
 music()
 pgzrun.go()
