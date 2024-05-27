@@ -13,6 +13,11 @@ squirrel = Actor("squirrel.png")
 squirrel.x = 400
 squirrel.y = 775
 
+#squirrel intro1
+squirrelintro1 = Actor("squirrel.png")
+squirrelintro1.x = 500
+squirrelintro1.y = 775
+
 #squirrelmirrored
 squirrelmirrored = Actor("squirrelmirrored.png")
 squirrelmirrored.x = 1700
@@ -22,6 +27,11 @@ squirrelmirrored.y = 775
 speechbubble = Actor("speechbubble.png")
 speechbubble.x = 650
 speechbubble.y = 600
+
+#speech bubble intro 1
+speechbubbleintro1 = Actor("speechbubble.png")
+speechbubbleintro1.x = 750
+speechbubbleintro1.y = 600
 
 #speech bubble mirrored
 speechbubblemirrored = Actor("speechbubblemirrored.png")
@@ -92,11 +102,11 @@ def draw():
         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("firstbackground", (0, 0)) #fügt hintergrundbild mashrooms ein.
-        squirrel.draw()
-        screen.blit("flower", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
-        speechbubble.draw()
-        screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=548, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.blit("magic", (0, 0)) #fügt hintergrundbild mashrooms ein.
+        squirrelintro1.draw()
+        screen.blit("magicplant", (0, 0))
+        speechbubbleintro1.draw()
+        screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("firstbackground", (0, 0))
@@ -172,13 +182,15 @@ def movebackground():
 
     if bridge.right < 0:
         bridge.left = bridge1.right
-            
-    if bridge1.right < 0:
-        bridge1.left = bridge2.right
         
     if bridge1.right < 0:
         bridge1.left = bridge.right
 
+    if bridge2.right < 0:
+        bridge2.left = bridge3.right
+        
+    if bridge3.right < 0:
+        bridge3.left = bridge2.right
           
 music()
 pgzrun.go()
