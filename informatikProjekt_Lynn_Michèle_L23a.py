@@ -198,10 +198,10 @@ def movebackground():
 def kostuemwechseln():
     if test.image == "mensch1.png":
         test.image = "mensch2.png"
-        time.sleep(0)
+        time.sleep(0.1)
     else:
         test.image = "mensch1.png"
-        time.sleep(0)
+        time.sleep(0.1)
           
 music()
 pgzrun.go()
