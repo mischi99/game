@@ -60,13 +60,13 @@ background.x = 0
 background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
-bridge = Actor("bridge1.png")
+bridge = Actor("bridge5.png")
 bridge.x = 0
-bridge1 = Actor ("bridge2.png")
+bridge1 = Actor ("bridge6.png")
 bridge1.x = WIDTH
-bridge2 = Actor("bridge2.png")
+bridge2 = Actor("bridge5.png")
 bridge2.x = 0
-bridge3 = Actor("bridge1.png")
+bridge3 = Actor("bridge6.png")
 bridge3.x = WIDTH
 
 test = Actor("mensch1.png")
@@ -198,10 +198,10 @@ def movebackground():
 def kostuemwechseln():
     if test.image == "mensch1.png":
         test.image = "mensch2.png"
-        time.sleep(0.1)
+        time.sleep(0)
     else:
         test.image = "mensch1.png"
-        time.sleep(0.1)
+        time.sleep(0)
           
 music()
 pgzrun.go()
