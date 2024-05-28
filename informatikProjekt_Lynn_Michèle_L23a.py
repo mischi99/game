@@ -132,7 +132,7 @@ def draw():
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf
    
-   if keyboard.tab:
+    if keyboard.tab:
         if not introfinished1 and not introfinished2 and not introfinished3:
             introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
             introfinished2 = False
@@ -230,7 +230,7 @@ def movebackground():
         
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if test.image = "mensch1.png":
+    if test.image == "mensch1.png":
         test.image = "mensch2.png"
         time.sleep(0.1)
     else:
