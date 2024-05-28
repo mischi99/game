@@ -63,24 +63,15 @@ background1.x = WIDTH
 bridge1 = Actor("bridge5.png")
 bridge1.x = 0
 bridge2 = Actor ("bridge5.1.png")
-bridge2.x = WIDTH
-bridge3 = Actor("bridge5.1.png")
-bridge3.x = 0
-bridge4 = Actor("bridge5.png")
-bridge4.x = WIDTH
-
-bridge5 = Actor("bridge6.png")
-bridge5.x = 0
-bridge6 = Actor ("bridge6.1.png")
-bridge6.x = WIDTH
-bridge7 = Actor("bridge6.1.png")
-bridge7.x = 0
-bridge8 = Actor("bridge6.png")
-bridge8.x = WIDTH
+bridge2.x = 0
+bridge3 = Actor("bridge6.1.png")
+bridge3.x = 1920
+bridge4 = Actor("bridge6.png")
+bridge4.x = 1920
 
 test = Actor("mensch1.png")
 test.x = 100
-test.y = 540
+test.y = 500
 
 #intro
 introfinished1 = False
@@ -100,20 +91,14 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
+    
     bridge1.draw()
-    bridge4.draw()
-    
-    bridge5.draw()
-    bridge7.draw()
-    
+    bridge4.draw()  
     test.draw()
-    
     kostuemwechseln()
-    bridge2.draw()   
+    bridge2.draw()
     bridge3.draw()
     
-    bridge6.draw()
-    bridge8.draw()
 
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
@@ -147,21 +132,24 @@ def draw():
         screen.draw.text("Los geht's!\n> Weiter mit\ny-Taste", left=1160, top=445, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf
-   
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
+  
     if keyboard.tab:
         if not introfinished1 and not introfinished2 and not introfinished3:
             introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
             introfinished2 = False
             introfinished3 = False
+            introfinished4 = False
+            startgame = False
             starttext = True
             
         elif  introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
             introfinished1 = True
             introfinished2 = True
             introfinished3 = False
+            introfinished4 = False
             startgame = False
-            starttext = True
+            starttext = False
             
         elif introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
             introfinished1 = True
@@ -217,7 +205,27 @@ def update():
 #         starttext = False #der Starttext wird somit angezeigt
 
     if startgame:
+        movebridge()
         movebackground()
+            
+def movebridge():
+
+    bridge1.x = bridge1.x - 3  
+    bridge2.x = bridge2.x - 3
+    bridge3.x = bridge3.x - 3  
+    bridge4.x = bridge4.x - 3
+    
+    if bridge1.right < 0:
+        bridge1.left = bridge3.right
+    
+    if bridge2.right < 0:
+        bridge2.left = bridge4.right
+    
+    if bridge3.right < 0:
+        bridge3.left = bridge1.right
+    
+    if bridge4.right < 0:
+        bridge4.left = bridge2.right
         
 def movebackground():
     background.x = background.x -3
@@ -227,43 +235,15 @@ def movebackground():
         background.left = background1.right
     if background1.right < 0:
         background1.left = background.right
-    
-    bridge1.x = bridge1.x - 3  
-    bridge2.x = bridge2.x - 3
-    bridge3.x = bridge3.x - 3  
-    bridge4.x = bridge4.x - 3
-    bridge5.x = bridge5.x - 3  
-    bridge6.x = bridge6.x - 3
-    bridge7.x = bridge7.x - 3
-    bridge8.x = bridge8.x - 3  
 
-    if bridge1.right < 0:
-        bridge1.left = bridge2.right
-            
-    if bridge2.right < 0:
-        bridge2.left = bridge3.right
-        
-    if bridge2.right < 0:
-        bridge2.left = bridge1.right
-    
-    if bridge5.right < 0:
-        bridge5.left = bridge6.right
-            
-    if bridge6.right < 0:
-        bridge6.left = bridge7.right
-        
-    if bridge6.right < 0:
-        bridge6.left = bridge5.right
-    
-           
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
     if test.image == "mensch1.png":
         test.image = "mensch2.png"
-        time.sleep(0)
+#         time.sleep(0)
     else:
         test.image = "mensch1.png"
-        time.sleep(0)
+#         time.sleep(0)
           
 music()
 pgzrun.go()
