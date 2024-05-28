@@ -60,14 +60,23 @@ background.x = 0
 background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
-bridge = Actor("bridge5.png")
-bridge.x = 0
-bridge1 = Actor ("bridge6.png")
-bridge1.x = WIDTH
-bridge2 = Actor("bridge5.png")
-bridge2.x = 0
-bridge3 = Actor("bridge6.png")
-bridge3.x = WIDTH
+bridge1 = Actor("bridge5.png")
+bridge1.x = 0
+bridge2 = Actor ("bridge5.1.png")
+bridge2.x = WIDTH
+bridge3 = Actor("bridge5.1.png")
+bridge3.x = 0
+bridge4 = Actor("bridge5.png")
+bridge4.x = WIDTH
+
+bridge5 = Actor("bridge6.png")
+bridge5.x = 0
+bridge6 = Actor ("bridge6.1.png")
+bridge6.x = WIDTH
+bridge7 = Actor("bridge6.1.png")
+bridge7.x = 0
+bridge8 = Actor("bridge6.png")
+bridge8.x = WIDTH
 
 test = Actor("mensch1.png")
 test.x = 100
@@ -91,12 +100,20 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-    bridge.draw()
-    bridge3.draw()
+    bridge1.draw()
+    bridge4.draw()
+    
+    bridge5.draw()
+    bridge7.draw()
+    
     test.draw()
+    
     kostuemwechseln()
-    bridge1.draw()   
-    bridge2.draw()
+    bridge2.draw()   
+    bridge3.draw()
+    
+    bridge6.draw()
+    bridge8.draw()
 
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
@@ -211,23 +228,34 @@ def movebackground():
     if background1.right < 0:
         background1.left = background.right
     
-    bridge.x = bridge.x - 3
-    bridge3.x = bridge3.x - 3
-    bridge1.x = bridge1.x - 3
+    bridge1.x = bridge1.x - 3  
     bridge2.x = bridge2.x - 3
+    bridge3.x = bridge3.x - 3  
+    bridge4.x = bridge4.x - 3
+    bridge5.x = bridge5.x - 3  
+    bridge6.x = bridge6.x - 3
+    bridge7.x = bridge7.x - 3
+    bridge8.x = bridge8.x - 3  
 
-    if bridge.right < 0:
-        bridge.left = bridge1.right
-        
     if bridge1.right < 0:
-        bridge1.left = bridge.right
-
+        bridge1.left = bridge2.right
+            
     if bridge2.right < 0:
         bridge2.left = bridge3.right
         
-    if bridge3.right < 0:
-        bridge3.left = bridge2.right
+    if bridge2.right < 0:
+        bridge2.left = bridge1.right
+    
+    if bridge5.right < 0:
+        bridge5.left = bridge6.right
+            
+    if bridge6.right < 0:
+        bridge6.left = bridge7.right
         
+    if bridge6.right < 0:
+        bridge6.left = bridge5.right
+    
+           
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
     if test.image == "mensch1.png":
