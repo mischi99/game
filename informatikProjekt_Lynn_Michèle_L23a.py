@@ -60,13 +60,13 @@ background.x = 0
 background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
-bridge1 = Actor("bridge5.png")
+bridge1 = Actor("bridge5-org.png")
 bridge1.x = 0
-bridge2 = Actor ("bridge5.1.png")
+bridge2 = Actor ("bridge5.1-org.png")
 bridge2.x = 0
 bridge3 = Actor("bridge6.1.png")
 bridge3.x = 1920
-bridge4 = Actor("bridge6.png")
+bridge4 = Actor("bridge6-org.png")
 bridge4.x = 1920
 
 test = Actor("mensch1.png")
