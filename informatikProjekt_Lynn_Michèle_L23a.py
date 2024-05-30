@@ -37,7 +37,7 @@ speechbubbleintro1.y = 600
 
 #speech bubble mirrored
 speechbubblemirrored = Actor("speechbubblemirrored.png")
-speechbubblemirrored.x = 1450
+speechbubblemirrored.x = 600
 speechbubblemirrored.y = 600
 
 #speech bubble troll
@@ -47,8 +47,8 @@ speechbubblet.y = 500
 
 #troll
 troll = Actor("troll2.png")
-troll.x = 1700
-troll.y = 775
+troll.x = 850
+troll.y = 740
 
 #provisorisch troll
 troll1 = Actor("2150251023-removebg-preview.png")
@@ -157,29 +157,28 @@ def draw():
         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("magic", (0, 0)) #fügt hintergrundbild mashrooms ein.
-        squirrelintro1.draw()
-        screen.blit("magicplant", (0, 0))
-        speechbubbleintro1.draw()
-        screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.blit("gamedirections", (0, 0)) #fügt hintergrundbild mashrooms ein.
+        screen.draw.text("Spielandleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
     
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("firstbackground", (0, 0))
+        screen.blit("firstbackground6", (0, 0))
+        squirrelintro1.draw()
+        speechbubbleintro1.draw()
+        screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        
+    elif not introfinished3: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+        screen.blit("backgroundnew", (0, 0))
         troll.draw()
         speechbubblemirrored.draw()
-        screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=1365, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
      
-    elif not introfinished3: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("firstbackground", (0, 0))
-        squirrel.draw()
-        screen.blit("flower", (0, 0)) #mashroom links unten in der Ecke, vor squirrel
-        speechbubble.draw()
-        screen.draw.text("Okay, ich bleibe hier!\n> Weiter mit x-Taste", left=549, top=570, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
+        
     elif not introfinished4: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("jungle", (0, 0))
         troll1.draw()
         speechbubblet.draw()
+        screen.draw.text("Okay, ich bleibe hier!\n> Weiter mit x-Taste", left=549, top=570, fontsize=23, color= (255,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         screen.draw.text("Los geht's!\n> Weiter mit\ny-Taste", left=1160, top=445, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
 def update():
