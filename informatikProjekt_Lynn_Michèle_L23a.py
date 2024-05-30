@@ -164,6 +164,7 @@ def draw():
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("firstbackground6", (0, 0))
         squirrelintro1.draw()
+        screen.blit("firstbackground6.1", (0,0))
         speechbubbleintro1.draw()
         screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
