@@ -3,6 +3,7 @@ import os
 os.environ["SDL_VIDEO_CENTERED"] = "0, 35"
 os.environ["SDL_VIDEO_FULLSCREEN_DISPLAY"] = "0"
 
+import random
 import time
 import pgzrun
 WIDTH = 1920
@@ -61,17 +62,32 @@ background1 = Actor("forestbackground1.jpg")
 background1.x = WIDTH
 
 bridge1 = Actor("bridge5-org.png")
-bridge1.x = 0
+bridge1.x = 1000
 bridge2 = Actor ("bridge5.1-org.png")
-bridge2.x = 0
+bridge2.x = 1000
 bridge3 = Actor("bridge6.1-org.png")
-bridge3.x = 1920
+bridge3.x = 2920
 bridge4 = Actor("bridge6-org.png")
-bridge4.x = 1920
+bridge4.x = 2920
+bridge5 = Actor("bridge7-org.png")
+bridge5.x = 2920 + 1920
+bridge6 = Actor("bridge7.1-org.png")
+bridge6.x = 2920 + 1920
+bridge7 = Actor("bridge7-org.png")
+bridge7.x = 2920 + 1920 + 1920
+bridge8 = Actor("bridge7.1-org.png")
+bridge8.x = 2920 + 1920 + 1920
 
 test = Actor("mensch1.png")
 test.x = 100
 test.y = 500
+
+lightningfull = Actor("lightningfull.png")
+lightningfull.x = random.randrange(WIDTH)
+lightningfull.y = random.randrange(HEIGHT)
+
+timelightning = 0
+activelightning = False
 
 #intro
 introfinished1 = False
@@ -93,12 +109,17 @@ def draw():
     background1.draw()
     
     bridge1.draw()
-    bridge4.draw()  
+    bridge4.draw()
+    bridge6.draw()
+    bridge8.draw()
     test.draw()
     kostuemwechseln()
     bridge2.draw()
     bridge3.draw()
+    bridge5.draw()
+    bridge7.draw()
     
+    lightningfull.draw()
 
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
@@ -207,25 +228,37 @@ def update():
     if startgame:
         movebridge()
         movebackground()
-            
+        movefigure()
+        powerup()
+    
 def movebridge():
 
-    bridge1.x = bridge1.x - 3  
+    bridge1.x = bridge1.x - 3
     bridge2.x = bridge2.x - 3
-    bridge3.x = bridge3.x - 3  
+    bridge3.x = bridge3.x - 3
     bridge4.x = bridge4.x - 3
+    bridge5.x = bridge5.x - 3
+    bridge6.x = bridge6.x - 3
+    bridge7.x = bridge7.x - 3
+    bridge8.x = bridge8.x - 3
+        
+    if bridge1.right < 0 and bridge2.right < 0 and bridge3.right < 0 and bridge4.right < 0:
+        bridge1.x = bridge1.x - WIDTH
+        bridge2.x = bridge2.x - WIDTH
+        bridge3.x = bridge3.x - WIDTH
+        bridge4.x = bridge3.x - WIDTH
+                 
+    if bridge5.right < 0:
+        bridge5.left = bridge6.right
     
-    if bridge1.right < 0:
-        bridge1.left = bridge3.right
+    if bridge6.right < 0:
+        bridge6.left = bridge7.right
     
-    if bridge2.right < 0:
-        bridge2.left = bridge4.right
+    if bridge7.right < 0:
+        bridge7.left = bridge8.right
     
-    if bridge3.right < 0:
-        bridge3.left = bridge1.right
-    
-    if bridge4.right < 0:
-        bridge4.left = bridge2.right
+    if bridge8.right < 0:
+        bridge8.left = bridge5.right    
         
 def movebackground():
     background.x = background.x -3
@@ -244,6 +277,47 @@ def kostuemwechseln():
     else:
         test.image = "mensch1.png"
 #         time.sleep(0)
-          
+
+def movefigure():
+    if keyboard.left:
+        test.x = test.x - 10
+    if keyboard.right:
+        test.x = test.x + 10
+    if keyboard.up:
+        test.y = test.y - 10
+    if keyboard.down:
+        test.y = test.y + 10
+    if test.left < 0:
+        test.left = 0
+    if test.right > WIDTH:
+        test.right = WIDTH
+    if test.top < 0:
+        test.top = 0
+    if test.bottom > HEIGHT:
+        test.bottom = HEIGHT
+        
+    test.bottom = min(test.bottom, 730)
+
+def powerup():
+    global activelightning
+    global timelightning
+
+    lightningfull.x = lightningfull.x - 5
+    lightningfull.bottom = min(lightningfull.bottom, 730)
+    lightningfull.top = max(lightningfull.top, 100)
+    
+    currenttime = time.time()
+    
+    if not activelightning and currenttime - timelightning > 10: #10 ist die zeit in Sekunden, danach kommt ein neuer powerup
+        lightningfull.x = random.randrange(WIDTH)
+        lightningfull.y = random.randrange(HEIGHT)
+        activelightning = True
+        timelightning = currenttime
+    
+    if test.colliderect(lightningfull):
+        activelightning = False
+        lightningfull.x = -100
+    
+    
 music()
 pgzrun.go()
