@@ -146,7 +146,7 @@ def draw():
         screen.blit("lightninghalffull.png", (1750, 50))
         screen.blit("lightningfull.png", (1800, 50))
         screen.draw.text("press the spacebar", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-                
+
         if keyboard.space: # Wenn die Leertaste  gedrückt wird, setze die Blitzsymbole zurück
             powerupnumber = 0
             powerupactive = True                   
