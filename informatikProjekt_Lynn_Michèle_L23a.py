@@ -88,6 +88,7 @@ lightningfull.y = random.randrange(HEIGHT)
 
 timelightning = 0
 activelightning = False
+powerupnumber = 0
 
 #intro
 introfinished1 = False
@@ -104,6 +105,8 @@ def music():
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
 
 def draw():
+    global powerupnumber
+    
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
@@ -120,10 +123,37 @@ def draw():
     bridge7.draw()
     
     lightningfull.draw()
-
+    screen.blit("lightningfullblack.png", (1800, 50))
+    screen.blit("lightninghalffullblack.png", (1750, 50))
+    screen.blit("lightningalmostemptyblack.png", (1700, 50))
+    screen.blit("lightningemptyblack.png", (1650, 50))
+    
+    if powerupnumber == 0:
+        screen.blit("lightningempty.png", (1650, 50))
+        
+    elif powerupnumber == 1:
+        screen.blit("lightningempty.png", (1650, 50))
+        screen.blit("lightningalmostempty.png", (1700, 50))
+        
+    elif powerupnumber == 2:
+        screen.blit("lightningempty.png", (1650, 50))
+        screen.blit("lightningalmostempty.png", (1700, 50))
+        screen.blit("lightninghalffull.png", (1750, 50))
+    
+    elif powerupnumber == 3:
+        screen.blit("lightningempty.png", (1650, 50))
+        screen.blit("lightningalmostempty.png", (1700, 50))
+        screen.blit("lightninghalffull.png", (1750, 50))
+        screen.blit("lightningfull.png", (1800, 50))
+        screen.draw.text("press the spacebar", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+                
+        if keyboard.space: # Wenn die Leertaste  gedrückt wird, setze die Blitzsymbole zurück
+            powerupnumber = 0
+            powerupactive = True                   
+    
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
-        screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", )
+        screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
@@ -153,7 +183,7 @@ def draw():
         screen.draw.text("Los geht's!\n> Weiter mit\ny-Taste", left=1160, top=445, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
   
     if keyboard.tab:
         if not introfinished1 and not introfinished2 and not introfinished3:
@@ -230,7 +260,7 @@ def update():
         movebackground()
         movefigure()
         powerup()
-    
+
 def movebridge():
 
     bridge1.x = bridge1.x - 3
@@ -299,25 +329,25 @@ def movefigure():
     test.bottom = min(test.bottom, 730)
 
 def powerup():
-    global activelightning
-    global timelightning
+    global activelightning, timelightning, powerupnumber
 
     lightningfull.x = lightningfull.x - 5
     lightningfull.bottom = min(lightningfull.bottom, 730)
     lightningfull.top = max(lightningfull.top, 100)
     
-    currenttime = time.time()
+    currenttime = time.time() # time.time() Anzahl der Sekunden
     
     if not activelightning and currenttime - timelightning > 10: #10 ist die zeit in Sekunden, danach kommt ein neuer powerup
-        lightningfull.x = random.randrange(WIDTH)
+        lightningfull.x = 1920
         lightningfull.y = random.randrange(HEIGHT)
+        
         activelightning = True
         timelightning = currenttime
     
     if test.colliderect(lightningfull):
         activelightning = False
         lightningfull.x = -100
-    
-    
+        powerupnumber = powerupnumber + 1
+
 music()
 pgzrun.go()
