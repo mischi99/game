@@ -78,7 +78,7 @@ bridge7.x = 2920 + 1920 + 1920
 bridge8 = Actor("bridge7.1-org.png")
 bridge8.x = 2920 + 1920 + 1920
 
-fairy = Actor("deanna-schneider-flutter-fly-1-unscreen-imageonline.co-69832-35.png")
+fairy = Actor("fairydragon.gif")
 fairy.x = 100
 fairy.y = 500
 
@@ -276,12 +276,12 @@ def movebackground():
 
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if fairy.image == "deanna-schneider-flutter-fly-1-unscreen-imageonline.co-69832-35.png":
-        fairy.image = "deanna-schneider-flutter-fly-1-unscreen-imageonline.co-69832-46.png"
-        time.sleep(0)
+    if fairy.image == "fairydragon.gif":
+        fairy.image = "fairydragon1.gif"
+        time.sleep(0.1)
     else:
-        fairy.image = "deanna-schneider-flutter-fly-1-unscreen-imageonline.co-69832-35.png.png"
-        time.sleep(0)
+        fairy.image = "fairydragon.gif"
+        time.sleep(0.1)
 
 def movefigure():
     global jumpstart, jumping
