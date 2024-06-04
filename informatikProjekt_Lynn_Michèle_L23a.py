@@ -78,9 +78,9 @@ bridge7.x = 2920 + 1920 + 1920
 bridge8 = Actor("bridge7.1-org.png")
 bridge8.x = 2920 + 1920 + 1920
 
-test = Actor("mensch1.png")
-test.x = 100
-test.y = 500
+fairy = Actor("fairyforgame.png")
+fairy.x = 100
+fairy.y = 500
 
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
@@ -100,6 +100,13 @@ introfinished4 = False
 startgame = False
 starttext = False
 
+#hüpfen
+jump_speed = -10
+gravity = 0.5
+jumpstart = 0
+jumping = False
+
+
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
@@ -115,7 +122,7 @@ def draw():
     bridge4.draw()
     bridge6.draw()
     bridge8.draw()
-    test.draw()
+    fairy.draw()
     kostuemwechseln()
     bridge2.draw()
     bridge3.draw()
@@ -222,45 +229,13 @@ def update():
         startgame = True #das Intro wird somit beendet
         starttext = False #der Starttext wird somit angezeigt    
    
-#     if keyboard.tab and not introfinished1 and not introfinished2 and not introfinished3: #wenn die tabulatortaste gedrückt wird und das intro noch nicht fertig ist dann soll der Starttext noch nicht angezeigt werden.
-#         introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
-#         introfinished2 = False
-#         introfinished3 = False
-#         starttext = True
-        
-#     if keyboard.m and introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#         introfinished1 = True
-#         introfinished2 = True
-#         introfinished3 = False
-#         startgame = False
-#         starttext = True
-        
-#     if keyboard.x and introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#         introfinished1 = True
-#         introfinished2 = True
-#         introfinished3 = True
-#         introfinished4 = False 
-#         startgame = False
-#         starttext = False
-        
-#     if keyboard.y and introfinished1 and introfinished2 and introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#         introfinished1 = True
-#         introfinished2 = True
-#         introfinished3 = True
-#         introfinished4 = True
-#         startgame = False
-#         starttext = True
-        
-#     if keyboard.space and introfinished1 and introfinished2 and introfinished3 and not startgame:
-#         startgame = True #das Intro wird somit beendet
-#         starttext = False #der Starttext wird somit angezeigt
-
     if startgame:
         movebridge()
         movebackground()
         movefigure()
         powerup()
-
+        jump()
+        
 def movebridge():
 
     bridge1.x = bridge1.x - 3
@@ -301,32 +276,51 @@ def movebackground():
 
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if test.image == "mensch1.png":
-        test.image = "mensch2.png"
+    if fairy.image == "mensch1.png":
+        fairy.image = "mensch2.png"
 #         time.sleep(0)
     else:
-        test.image = "mensch1.png"
+        fairy.image = "mensch1.png"
 #         time.sleep(0)
 
 def movefigure():
+    global jumpstart, jumping
     if keyboard.left:
-        test.x = test.x - 10
+        fairy.x = fairy.x - 10
     if keyboard.right:
-        test.x = test.x + 10
+        fairy.x = fairy.x + 10
     if keyboard.up:
-        test.y = test.y - 10
+        fairy.y = fairy.y - 10
     if keyboard.down:
-        test.y = test.y + 10
-    if test.left < 0:
-        test.left = 0
-    if test.right > WIDTH:
-        test.right = WIDTH
-    if test.top < 0:
-        test.top = 0
-    if test.bottom > HEIGHT:
-        test.bottom = HEIGHT
+        fairy.y = fairy.y + 10
+    if fairy.left < 0:
+        fairy.left = 0
+    if fairy.right > WIDTH:
+        fairy.right = WIDTH
+    if fairy.top < 0:
+        fairy.top = 0
+    if fairy.bottom > HEIGHT:
+        fairy.bottom = HEIGHT
         
-    test.bottom = min(test.bottom, 730)
+    fairy.bottom = min(fairy.bottom, 730)
+    
+def jump():
+    global jumpstart, jumping
+    
+    if keyboard.m and not jumping:
+        jumpstart = jump_speed
+        jumping = True
+
+    # Schwerkraft anwenden
+    if jumping:
+        fairy.y += jumpstart
+        jumpstart += gravity
+
+        # Bodenberührung prüfen
+        if fairy.y >= 730:
+            fairy.y = 730
+            jumping = False
+            jumpstart = 0
 
 def powerup():
     global activelightning, timelightning, powerupnumber
@@ -344,7 +338,7 @@ def powerup():
         activelightning = True
         timelightning = currenttime
     
-    if test.colliderect(lightningfull):
+    if fairy.colliderect(lightningfull):
         activelightning = False
         lightningfull.x = -100
         powerupnumber = powerupnumber + 1

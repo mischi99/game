@@ -7,31 +7,29 @@ HEIGHT = 600
 character = Actor('fairyforgame.png', (WIDTH // 2, HEIGHT - 50))
 
 # Physik-Variablen
-jump.y = 0
+jumpstart = 0
 jumping = False
-gravity = 0.5
-jump_power = -10
 
 def draw():
     screen.clear()
     character.draw()
 
 def update():
-    global jump.y, jumping
-    
+    global jumpstart, jumping
+
     # Sprunglogik
     if keyboard.space and not jumping:
-        jump = jump_power
+        jumpstart = -10
         jumping = True
     
     # Schwerkraft anwenden
-    jump.y += gravity
-    character.y += velocity_y
+    character.y += jumpstart
+    jumpstart += 0.5
     
     # Boden berühren
     if character.y >= HEIGHT - 50:
         character.y = HEIGHT - 50
-        jump.y = 0
+        jumpstart = 0
         jumping = False
 
     # Links und rechts bewegen
