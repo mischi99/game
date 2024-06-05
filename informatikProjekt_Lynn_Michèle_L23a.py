@@ -99,8 +99,8 @@ star.y = random.randrange(HEIGHT)
 
 activestar = False
 timestar = 0
-starcount = 0
-star_counter = 0
+# starcount = 0
+starcounter = 0
 
 
 #intro
@@ -118,7 +118,6 @@ jump_speed = -10
 gravity = 0.5
 jumpstart = 0
 jumping = False
-
 
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
@@ -172,7 +171,7 @@ def draw():
             powerupactive = True
     
     star.draw()
-    screen.draw.text(str(star_counter), (85, 35), fontsize=40, color=(255, 255, 255))
+    screen.draw.text(str(starcounter), (85, 35), fontsize=40, color=(255, 255, 255))
     screen.blit("starforgametiny.png", (20, 20))
     
    
@@ -232,8 +231,8 @@ def draw():
         screen.draw.text("Los geht's!\n> Weiter mit\ny-Taste", left=1160, top=445, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, starcount #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
-  
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
+     
     if keyboard.tab:
         if not introfinished1 and not introfinished2 and not introfinished3:
             introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
@@ -280,7 +279,6 @@ def update():
         jump()
         
 def movebridge():
-
     bridge1.x = bridge1.x - 3
     bridge2.x = bridge2.x - 3
     bridge3.x = bridge3.x - 3
@@ -295,7 +293,8 @@ def movebridge():
         bridge2.x = bridge2.x - WIDTH
         bridge3.x = bridge3.x - WIDTH
         bridge4.x = bridge3.x - WIDTH
-                 
+                
+    
     if bridge5.right < 0:
         bridge5.left = bridge6.right
     
@@ -306,8 +305,8 @@ def movebridge():
         bridge7.left = bridge8.right
     
     if bridge8.right < 0:
-        bridge8.left = bridge5.right    
-        
+        bridge8.left = bridge5.right
+           
 def movebackground():
     background.x = background.x -3
     background1.x = background1.x -3
@@ -322,6 +321,15 @@ def kostuemwechseln():
     if fairy.image == "fairydragon.gif":
         fairy.image = "fairydragon1.gif"
         time.sleep(0.1)
+    
+    elif fairy.image == "fairydragon1.gif":
+        fairy.image = "fairydragon2.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "fairydragon2.gif":
+        fairy.image = "fairydragon3.gif"
+        time.sleep(0.1)
+        
     else:
         fairy.image = "fairydragon.gif"
         time.sleep(0.1)
@@ -387,7 +395,7 @@ def powerup_lightning():
         powerupnumber = powerupnumber + 1
         
 def powerup_star():
-    global activestar, timestar, star_counter
+    global activestar, timestar, starcounter
 
     star.x = star.x - 5
     star.bottom = min(star.bottom, 730)
@@ -406,6 +414,6 @@ def powerup_star():
         if fairy.colliderect(star):
             activestar = False
             star.x = -100
-            star_counter = star_counter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
+            starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
 music()
 pgzrun.go()
