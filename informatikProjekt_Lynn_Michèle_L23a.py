@@ -293,8 +293,7 @@ def movebridge():
         bridge2.x = bridge2.x - WIDTH
         bridge3.x = bridge3.x - WIDTH
         bridge4.x = bridge3.x - WIDTH
-                
-    
+        
     if bridge5.right < 0:
         bridge5.left = bridge6.right
     
