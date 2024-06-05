@@ -1,4 +1,5 @@
 import pygame.mixer
+
 import os
 os.environ["SDL_VIDEO_CENTERED"] = "0, 35"
 os.environ["SDL_VIDEO_FULLSCREEN_DISPLAY"] = "0"
@@ -6,6 +7,7 @@ os.environ["SDL_VIDEO_FULLSCREEN_DISPLAY"] = "0"
 import random
 import time
 import pgzrun
+
 WIDTH = 1920
 HEIGHT = 985
 TITLE = "Informatik Projekt - Designed by Lynn and Michèle"
@@ -82,24 +84,23 @@ fairy = Actor("fairydragon.gif")
 fairy.x = 100
 fairy.y = 500
 
-star = Actor ("starforgame.png")
-
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
 lightningfull.y = random.randrange(HEIGHT)
 
-timelightning = 0
 activelightning = False
+timelightning = 0
 powerupnumber = 0
 
-#Stern 
-star = Actor ("starforgame.png")
+#Stern
+star = Actor ("starforgametiny.png")
 star.x = random.randrange(WIDTH)
 star.y = random.randrange(HEIGHT)
 
 activestar = False
 timestar = 0
 starcount = 0
+star_counter = 0
 
 
 #intro
@@ -169,30 +170,34 @@ def draw():
         if keyboard.space: # Wenn die Leertaste  gedrückt wird, setze die Blitzsymbole zurück
             powerupnumber = 0
             powerupactive = True
-            
+    
     star.draw()
-    screen.blit("starforgameblack.png", (1800, 90))
-    screen.blit("starforgameblack.png", (1750, 90))
-    screen.blit("starforgameblack.png", (1700, 90))
-    screen.blit("starforgameblack.png", (1650, 90))
+    screen.draw.text(str(star_counter), (85, 35), fontsize=40, color=(255, 255, 255))
+    screen.blit("starforgametiny.png", (20, 20))
     
-    if starcount == 0:
-        screen.blit("starforgameblack.png", (1650, 50))
-        
-    elif starcount == 1:
-        screen.blit("starforgameblack.png", (1650, 50))
-        screen.blit("starforgameblack.png", (1700, 50))
-        
-    elif starcount == 2:
-        screen.blit("starforgameblack.png", (1650, 50))
-        screen.blit("starforgameblack.png", (1700, 50))
-        screen.blit("starforgame.png", (1750, 50))
+   
+#     screen.blit("starforgameblack.png", (1800, 90))
+#     screen.blit("starforgameblack.png", (1750, 90))
+#     screen.blit("starforgameblack.png", (1700, 90))
+#     screen.blit("starforgameblack.png", (1650, 90))
     
-    elif starcount == 3:
-        screen.blit("starforgameblack.png", (1650, 50))
-        screen.blit("starforgameblack.png", (1700, 50))
-        screen.blit("starforgame.png", (1750, 50))
-        screen.blit("starforgame.png", (1800, 50))
+#     if starcount == 0:
+#         screen.blit("starforgameblack.png", (1650, 50))
+#         
+#     elif starcount == 1:
+#         screen.blit("starforgameblack.png", (1650, 50))
+#         screen.blit("starforgameblack.png", (1700, 50))
+#         
+#     elif starcount == 2:
+#         screen.blit("starforgameblack.png", (1650, 50))
+#         screen.blit("starforgameblack.png", (1700, 50))
+#         screen.blit("starforgame.png", (1750, 50))
+#     
+#     elif starcount == 3:
+#         screen.blit("starforgameblack.png", (1650, 50))
+#         screen.blit("starforgameblack.png", (1700, 50))
+#         screen.blit("starforgame.png", (1750, 50))
+#         screen.blit("starforgame.png", (1800, 50))
 
     
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
@@ -271,7 +276,7 @@ def update():
         movebackground()
         movefigure()
         powerup_lightning()
-        powerup_star
+        powerup_star()
         jump()
         
 def movebridge():
@@ -382,17 +387,15 @@ def powerup_lightning():
         powerupnumber = powerupnumber + 1
         
 def powerup_star():
-    global activestar
-    global timestar
-    global starcount
+    global activestar, timestar, star_counter
 
     star.x = star.x - 5
     star.bottom = min(star.bottom, 730)
     star.top = max(star.top, 100)
     
-    currenttime = time.time() # time.time() Anzahl der Sekunden
+    currenttime = time.time()
     
-    if not activestar and currenttime - timestar > 10: #10 ist die zeit in Sekunden, danach kommt ein neuer powerup
+    if not activestar and currenttime - timestar > 10: 
         star.x = 1920
         star.y = random.randrange(HEIGHT)
         
@@ -400,9 +403,9 @@ def powerup_star():
         timestar = currenttime
     
     if fairy.colliderect(star):
-        activestar = False
-        star.x = -100
-        starcount = starcount + 1
-
+        if fairy.colliderect(star):
+            activestar = False
+            star.x = -100
+            star_counter = star_counter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
 music()
 pgzrun.go()
