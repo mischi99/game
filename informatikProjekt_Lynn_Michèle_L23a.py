@@ -82,6 +82,8 @@ fairy = Actor("fairydragon.gif")
 fairy.x = 100
 fairy.y = 500
 
+star = Actor ("starforgame.png")
+
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
 lightningfull.y = random.randrange(HEIGHT)
@@ -89,6 +91,16 @@ lightningfull.y = random.randrange(HEIGHT)
 timelightning = 0
 activelightning = False
 powerupnumber = 0
+
+#Stern 
+star = Actor ("starforgame.png")
+star.x = random.randrange(WIDTH)
+star.y = random.randrange(HEIGHT)
+
+activestar = False
+timestar = 0
+starcount = 0
+
 
 #intro
 introfinished1 = False
@@ -112,7 +124,7 @@ def music():
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
 
 def draw():
-    global powerupnumber
+    global powerupnumber, starcount
     
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
@@ -156,7 +168,32 @@ def draw():
 
         if keyboard.space: # Wenn die Leertaste  gedrückt wird, setze die Blitzsymbole zurück
             powerupnumber = 0
-            powerupactive = True                   
+            powerupactive = True
+            
+    star.draw()
+    screen.blit("starforgameblack.png", (1800, 90))
+    screen.blit("starforgameblack.png", (1750, 90))
+    screen.blit("starforgameblack.png", (1700, 90))
+    screen.blit("starforgameblack.png", (1650, 90))
+    
+    if starcount == 0:
+        screen.blit("starforgameblack.png", (1650, 50))
+        
+    elif starcount == 1:
+        screen.blit("starforgameblack.png", (1650, 50))
+        screen.blit("starforgameblack.png", (1700, 50))
+        
+    elif starcount == 2:
+        screen.blit("starforgameblack.png", (1650, 50))
+        screen.blit("starforgameblack.png", (1700, 50))
+        screen.blit("starforgame.png", (1750, 50))
+    
+    elif starcount == 3:
+        screen.blit("starforgameblack.png", (1650, 50))
+        screen.blit("starforgameblack.png", (1700, 50))
+        screen.blit("starforgame.png", (1750, 50))
+        screen.blit("starforgame.png", (1800, 50))
+
     
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
@@ -190,7 +227,7 @@ def draw():
         screen.draw.text("Los geht's!\n> Weiter mit\ny-Taste", left=1160, top=445, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, starcount #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
   
     if keyboard.tab:
         if not introfinished1 and not introfinished2 and not introfinished3:
@@ -233,7 +270,8 @@ def update():
         movebridge()
         movebackground()
         movefigure()
-        powerup()
+        powerup_lightning()
+        powerup_star
         jump()
         
 def movebridge():
@@ -322,7 +360,7 @@ def jump():
             jumping = False
             jumpstart = 0
 
-def powerup():
+def powerup_lightning():
     global activelightning, timelightning, powerupnumber
 
     lightningfull.x = lightningfull.x - 5
@@ -342,6 +380,29 @@ def powerup():
         activelightning = False
         lightningfull.x = -100
         powerupnumber = powerupnumber + 1
+        
+def powerup_star():
+    global activestar
+    global timestar
+    global starcount
+
+    star.x = star.x - 5
+    star.bottom = min(star.bottom, 730)
+    star.top = max(star.top, 100)
+    
+    currenttime = time.time() # time.time() Anzahl der Sekunden
+    
+    if not activestar and currenttime - timestar > 10: #10 ist die zeit in Sekunden, danach kommt ein neuer powerup
+        star.x = 1920
+        star.y = random.randrange(HEIGHT)
+        
+        activestar = True
+        timestar = currenttime
+    
+    if fairy.colliderect(star):
+        activestar = False
+        star.x = -100
+        starcount = starcount + 1
 
 music()
 pgzrun.go()
