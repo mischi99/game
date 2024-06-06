@@ -120,11 +120,6 @@ jumping = False
 #zurückgelegte distanz
 distance = 0
 
-#Menue anfang
-menue = False
-
-#Menue ende
-
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
@@ -191,7 +186,7 @@ def draw():
 #     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("gamedirections", (0, 0)) #fügt hintergrundbild mashrooms ein.
-        screen.draw.text("Spielandleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
     
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
@@ -246,7 +241,12 @@ def update():
         powerup_lightning()
         powerup_star()
         jump()
-            
+    
+    if starcounter == 1:
+        screen.blit("repeat", (0, 0))
+        startgame = False
+        
+        
 def movebridge():
     global distance
     bridgespeed = 5
@@ -347,7 +347,7 @@ def movefigure():
     if fairy.bottom > HEIGHT:
         fairy.bottom = HEIGHT
         
-    fairy.bottom = min(fairy.bottom, 730)
+    fairy.bottom = min(fairy.bottom, 800)
     
 def jump():
     global jumpstart, jumping
@@ -413,9 +413,10 @@ def powerup_star():
 def on_mouse_down(pos):
     global introfinished4, startgame
     text_width = 80  # Geschätzte Breite des Textes 
-    text_height = 23 # Geschätzte Höhe des Textes 
+    text_height = 40 # Geschätzte Höhe des Textes 
     if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
         introfinished4 = True
-        startgame = True           
+        startgame = True
+          
 music()
 pgzrun.go()
