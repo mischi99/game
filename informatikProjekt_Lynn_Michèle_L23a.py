@@ -51,11 +51,6 @@ troll = Actor("troll2.png")
 troll.x = 850
 troll.y = 740
 
-#provisorisch troll
-troll1 = Actor("2150251023-removebg-preview.png")
-troll1.x = 1000
-troll1.y = 670
-
 #background
 background = Actor("forestbackground.jpg")
 background.x = 0
@@ -243,10 +238,8 @@ def update():
         jump()
     
     if starcounter == 1:
-        screen.blit("repeat", (0, 0))
         startgame = False
-        
-        
+               
 def movebridge():
     global distance
     bridgespeed = 5
