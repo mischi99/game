@@ -80,7 +80,7 @@ bridge7.x = 2920 + 1920 + 1920
 bridge8 = Actor("bridge7.1-org.png")
 bridge8.x = 2920 + 1920 + 1920
 
-fairy = Actor("fairydragon.gif")
+fairy = Actor("frame-022.gif")
 fairy.x = 100
 fairy.y = 500
 
@@ -317,20 +317,72 @@ def movebackground():
 
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if fairy.image == "fairydragon.gif":
-        fairy.image = "fairydragon1.gif"
+    if fairy.image == "frame-022.gif":
+        fairy.image = "frame-023.gif"
         time.sleep(0.1)
     
-    elif fairy.image == "fairydragon1.gif":
-        fairy.image = "fairydragon2.gif"
+    elif fairy.image == "frame-023.gif":
+        fairy.image = "frame-024.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "fairydragon2.gif":
-        fairy.image = "fairydragon3.gif"
+    elif fairy.image == "frame-024.gif":
+        fairy.image = "frame-025.gif"
         time.sleep(0.1)
         
+    elif fairy.image == "frame-025.gif":
+        fairy.image = "frame-026.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-026.gif":
+        fairy.image = "frame-027.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-027.gif":
+        fairy.image = "frame-028.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-028.gif":
+        fairy.image = "frame-029.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-029.gif":
+        fairy.image = "frame-030.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-030.gif":
+        fairy.image = "frame-031.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-031.gif":
+        fairy.image = "frame-032.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-032.gif":
+        fairy.image = "frame-033.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-033.gif":
+        fairy.image = "frame-034.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-034.gif":
+        fairy.image = "frame-035.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-035.gif":
+        fairy.image = "frame-036.gif"
+        time.sleep(0.1)
+    
+    elif fairy.image == "frame-036.gif":
+        fairy.image = "frame-037.gif"
+        time.sleep(0.1)
+        
+    elif fairy.image == "frame-037.gif":
+        fairy.image = "frame-038.gif"
+        time.sleep(0.1)
+         
     else:
-        fairy.image = "fairydragon.gif"
+        fairy.image = "frame-022.gif"
         time.sleep(0.1)
 
 def movefigure():
