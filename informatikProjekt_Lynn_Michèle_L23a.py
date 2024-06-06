@@ -184,11 +184,11 @@ def draw():
     #zurückgelegte Strecke
     screen.draw.text(f"Zurückgelegte Strecke: {distance/100} m", (20, 80), fontsize=40, color=(255, 255, 255))
    
-    if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
-        white = 255, 255, 255
-        screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
-        screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
-    
+#     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
+#         white = 255, 255, 255
+#         screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
+#         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
+#     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("gamedirections", (0, 0)) #fügt hintergrundbild mashrooms ein.
         screen.draw.text("Spielandleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
@@ -208,8 +208,8 @@ def draw():
         screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished4: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("gamedirections", (0, 0))
-        screen.draw.text("Starten", left=549, top=570, fontsize=23, color= (255,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.blit("backgroundtransparent", (0, 0))
+        screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
@@ -237,20 +237,8 @@ def update():
             introfinished3 = True
             introfinished4 = False 
             startgame = False
-            starttext = False
-            
-        elif introfinished1 and introfinished2 and introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-            introfinished1 = True
-            introfinished2 = True
-            introfinished3 = True
-            introfinished4 = True
-            startgame = False
-            starttext = True
-                    
-    if keyboard.space and introfinished1 and introfinished2 and introfinished3 and not startgame:
-        startgame = True #das Intro wird somit beendet
-        starttext = False #der Starttext wird somit angezeigt    
-   
+            starttext = False                
+      
     if startgame:
         movebridge()
         movebackground()
@@ -424,9 +412,9 @@ def powerup_star():
             
 def on_mouse_down(pos):
     global introfinished4, startgame
-    text_width = 80  # Geschätzte Breite des Textes "Starten"
-    text_height = 23
-    if not introfinished4 and 549 < pos[0] < 549 + text_width and 570 < pos[1] < 570 + text_height:
+    text_width = 80  # Geschätzte Breite des Textes 
+    text_height = 23 # Geschätzte Höhe des Textes 
+    if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
         introfinished4 = True
         startgame = True           
 music()
