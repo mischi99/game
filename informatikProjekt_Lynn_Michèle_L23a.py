@@ -120,6 +120,11 @@ jumping = False
 #zurückgelegte distanz
 distance = 0
 
+#Menue anfang
+menue = False
+
+#Menue ende
+
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
@@ -171,11 +176,13 @@ def draw():
             powerupnumber = 0
             powerupactive = True
     
+    #anzahl eingesammelte Sternen
     star.draw()
     screen.draw.text(str(starcounter), (85, 35), fontsize=40, color=(255, 255, 255))
     screen.blit("starforgametiny.png", (20, 20))
     
-    screen.draw.text(f"Zurückgelegte Strecke: {distance / 100} Meter", (20, 80), fontsize=40, color=(255, 255, 255))
+    #zurückgelegte Strecke
+    screen.draw.text(f"Zurückgelegte Strecke: {distance/100} m", (20, 80), fontsize=40, color=(255, 255, 255))
    
 #     screen.blit("starforgameblack.png", (1800, 90))
 #     screen.blit("starforgameblack.png", (1750, 90))
@@ -279,6 +286,7 @@ def update():
         jump()
         
 def movebridge():
+    global distance
     bridge1.x = bridge1.x - 3
     bridge2.x = bridge2.x - 3
     bridge3.x = bridge3.x - 3
@@ -287,7 +295,9 @@ def movebridge():
     bridge6.x = bridge6.x - 3
     bridge7.x = bridge7.x - 3
     bridge8.x = bridge8.x - 3
-        
+    
+    distance = distance + 1
+    
     if bridge1.right < 0 and bridge2.right < 0 and bridge3.right < 0 and bridge4.right < 0:
         bridge1.x = bridge1.x - WIDTH
         bridge2.x = bridge2.x - WIDTH
@@ -357,14 +367,12 @@ def kostuemwechseln():
         time.sleep(0.1)
 
 def movefigure():
-    global jumpstart, jumping, distance
+    global jumpstart, jumping
     steps = 10
     if keyboard.left:
         fairy.x = fairy.x - steps
-        distance = steps /10
     if keyboard.right:
         fairy.x = fairy.x + steps
-        distance = steps /10
     if keyboard.up:
         fairy.y = fairy.y - steps
     if keyboard.down:
@@ -440,5 +448,8 @@ def powerup_star():
             activestar = False
             star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
+            
+def menue():
+    
 music()
 pgzrun.go()
