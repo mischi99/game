@@ -121,7 +121,7 @@ jumping = False
 distance = 0
 
 #Menue anfang
-# menue = False
+menue = False
 
 #Menue ende
 
@@ -184,29 +184,6 @@ def draw():
     #zurückgelegte Strecke
     screen.draw.text(f"Zurückgelegte Strecke: {distance/100} m", (20, 80), fontsize=40, color=(255, 255, 255))
    
-#     screen.blit("starforgameblack.png", (1800, 90))
-#     screen.blit("starforgameblack.png", (1750, 90))
-#     screen.blit("starforgameblack.png", (1700, 90))
-#     screen.blit("starforgameblack.png", (1650, 90))
-    
-#     if starcount == 0:
-#         screen.blit("starforgameblack.png", (1650, 50))
-#         
-#     elif starcount == 1:
-#         screen.blit("starforgameblack.png", (1650, 50))
-#         screen.blit("starforgameblack.png", (1700, 50))
-#         
-#     elif starcount == 2:
-#         screen.blit("starforgameblack.png", (1650, 50))
-#         screen.blit("starforgameblack.png", (1700, 50))
-#         screen.blit("starforgame.png", (1750, 50))
-#     
-#     elif starcount == 3:
-#         screen.blit("starforgameblack.png", (1650, 50))
-#         screen.blit("starforgameblack.png", (1700, 50))
-#         screen.blit("starforgame.png", (1750, 50))
-#         screen.blit("starforgame.png", (1800, 50))
-
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
         screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
@@ -231,12 +208,9 @@ def draw():
         screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished4: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("jungle", (0, 0))
-        troll1.draw()
-        speechbubblet.draw()
-        screen.draw.text("Okay, ich bleibe hier!\n> Weiter mit x-Taste", left=549, top=570, fontsize=23, color= (255,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("Los geht's!\n> Weiter mit\ny-Taste", left=1160, top=445, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-
+        screen.blit("gamedirections", (0, 0))
+        screen.draw.text("Starten", left=549, top=570, fontsize=23, color= (255,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
      
@@ -272,7 +246,7 @@ def update():
             introfinished4 = True
             startgame = False
             starttext = True
-        
+                    
     if keyboard.space and introfinished1 and introfinished2 and introfinished3 and not startgame:
         startgame = True #das Intro wird somit beendet
         starttext = False #der Starttext wird somit angezeigt    
@@ -284,18 +258,18 @@ def update():
         powerup_lightning()
         powerup_star()
         jump()
-        
-        
+            
 def movebridge():
     global distance
-    bridge1.x = bridge1.x - 3
-    bridge2.x = bridge2.x - 3
-    bridge3.x = bridge3.x - 3
-    bridge4.x = bridge4.x - 3
-    bridge5.x = bridge5.x - 3
-    bridge6.x = bridge6.x - 3
-    bridge7.x = bridge7.x - 3
-    bridge8.x = bridge8.x - 3
+    bridgespeed = 5
+    bridge1.x = bridge1.x - bridgespeed
+    bridge2.x = bridge2.x - bridgespeed
+    bridge3.x = bridge3.x - bridgespeed
+    bridge4.x = bridge4.x - bridgespeed
+    bridge5.x = bridge5.x - bridgespeed
+    bridge6.x = bridge6.x - bridgespeed
+    bridge7.x = bridge7.x - bridgespeed
+    bridge8.x = bridge8.x - bridgespeed
     
     distance = distance + 1
     
@@ -318,8 +292,9 @@ def movebridge():
         bridge8.left = bridge5.right
            
 def movebackground():
-    background.x = background.x -3
-    background1.x = background1.x -3
+    speedbackground = 5
+    background.x = background.x - speedbackground
+    background1.x = background1.x - speedbackground
     
     if background.right < 0:
         background.left = background1.right
@@ -428,7 +403,7 @@ def powerup_lightning():
 def powerup_star():
     global activestar, timestar, starcounter
 
-    star.x = star.x - 5
+    star.x = star.x - 10
     star.bottom = min(star.bottom, 730)
     star.top = max(star.top, 100)
     
@@ -446,7 +421,13 @@ def powerup_star():
             activestar = False
             star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
-          
-           
+            
+def on_mouse_down(pos):
+    global introfinished4, startgame
+    text_width = 80  # Geschätzte Breite des Textes "Starten"
+    text_height = 23
+    if not introfinished4 and 549 < pos[0] < 549 + text_width and 570 < pos[1] < 570 + text_height:
+        introfinished4 = True
+        startgame = True           
 music()
 pgzrun.go()
