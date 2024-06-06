@@ -121,7 +121,7 @@ jumping = False
 distance = 0
 
 #Menue anfang
-menue = False
+# menue = False
 
 #Menue ende
 
@@ -285,6 +285,7 @@ def update():
         powerup_star()
         jump()
         
+        
 def movebridge():
     global distance
     bridge1.x = bridge1.x - 3
@@ -326,9 +327,6 @@ def movebackground():
         background1.left = background.right
 
 # Kostümwechsel zwischen mensch1 und mensch2
-def kostuemwechseln():
-    import time
-
 def kostuemwechseln():
     if fairy.image == "frame-033.gif":
         fairy.image = "frame-034.gif"
@@ -436,7 +434,7 @@ def powerup_star():
     
     currenttime = time.time()
     
-    if not activestar and currenttime - timestar > 10: 
+    if not activestar and currenttime - timestar > 5: 
         star.x = 1920
         star.y = random.randrange(HEIGHT)
         
@@ -448,8 +446,7 @@ def powerup_star():
             activestar = False
             star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
-            
-def menue():
-    
+          
+           
 music()
 pgzrun.go()
