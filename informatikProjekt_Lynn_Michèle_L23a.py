@@ -1,5 +1,4 @@
 import pygame.mixer
-
 import os
 os.environ["SDL_VIDEO_CENTERED"] = "0, 35"
 os.environ["SDL_VIDEO_FULLSCREEN_DISPLAY"] = "0"
@@ -102,7 +101,6 @@ timestar = 0
 # starcount = 0
 starcounter = 0
 
-
 #intro
 introfinished1 = False
 introfinished2 = False
@@ -202,7 +200,6 @@ def draw():
 #         screen.blit("starforgame.png", (1750, 50))
 #         screen.blit("starforgame.png", (1800, 50))
 
-    
     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
         white = 255, 255, 255
         screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
@@ -225,7 +222,6 @@ def draw():
         troll.draw()
         speechbubblemirrored.draw()
         screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-     
         
     elif not introfinished4: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("jungle", (0, 0))
