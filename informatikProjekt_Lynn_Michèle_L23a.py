@@ -93,7 +93,6 @@ star.y = random.randrange(HEIGHT)
 
 activestar = False
 timestar = 0
-# starcount = 0
 starcounter = 0
 
 #intro
@@ -240,7 +239,7 @@ def update():
         powerup_star()
         jump()
     
-    if starcounter == 1:
+    if starcounter == 10:
         startgame = False
                
 def movebridge():
