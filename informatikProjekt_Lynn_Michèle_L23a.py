@@ -181,12 +181,13 @@ def draw():
 #     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("gamedirections", (0, 0)) #fügt hintergrundbild mashrooms ein.
+        screen.blit("arrowblack", (1770, 835))
         screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("firstbackground6", (0, 0))
-        screen.blit("arrow", (1700, 750))
+        screen.blit("arrowwhite", (1770, 835))
         squirrelintro1.draw()
         screen.blit("firstbackground6.1", (0,0))
         speechbubbleintro1.draw()
@@ -194,6 +195,7 @@ def draw():
         
     elif not introfinished3: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.blit("backgroundnew", (0, 0))
+        screen.blit("arrowwhite", (1770, 835))
         troll.draw()
         speechbubblemirrored.draw()
         screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
@@ -205,30 +207,30 @@ def draw():
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
      
-    if keyboard.tab:
-        if not introfinished1 and not introfinished2 and not introfinished3:
-            introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
-            introfinished2 = False
-            introfinished3 = False
-            introfinished4 = False
-            startgame = False
-            starttext = True
-            
-        elif  introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-            introfinished1 = True
-            introfinished2 = True
-            introfinished3 = False
-            introfinished4 = False
-            startgame = False
-            starttext = False
-            
-        elif introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-            introfinished1 = True
-            introfinished2 = True
-            introfinished3 = True
-            introfinished4 = False 
-            startgame = False
-            starttext = False                
+#     if kexboard.tab:
+#         if not introfinished1 and not introfinished2 and not introfinished3:
+#             introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
+#             introfinished2 = False
+#             introfinished3 = False
+#             introfinished4 = False
+#             startgame = False
+#             starttext = True
+#             
+#         elif  introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+#             introfinished1 = True
+#             introfinished2 = True
+#             introfinished3 = False
+#             introfinished4 = False
+#             startgame = False
+#             starttext = False
+#             
+#         elif introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
+#             introfinished1 = True
+#             introfinished2 = True
+#             introfinished3 = True
+#             introfinished4 = False 
+#             startgame = False
+#             starttext = False                
       
     if startgame:
         movebridge()
@@ -352,8 +354,8 @@ def jump():
 
     # Schwerkraft anwenden
     if jumping:
-        fairy.y += jumpstart
-        jumpstart += gravity
+        fairy.y = fairy.y + jumpstart
+        jumpstart = jumpstart + gravity
 
         # Bodenberührung prüfen
         if fairy.y >= 730:
@@ -405,13 +407,33 @@ def powerup_star():
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             
 def on_mouse_down(pos):
-    global introfinished4, startgame
-    if not introfinished4:
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame
+    
+    if not introfinished1:
+        text_width = 100  # Geschätzte Breite des Textes 
+        text_height = 100 # Geschätzte Höhe des Textes 
+        if not introfinished1 and 1770 < pos[0] < 1770  + text_width and 835 < pos[1] < 835 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            introfinished1 = True
+            startgame = False
+            
+    elif not introfinished2:
+        text_width = 100  # Geschätzte Breite des Textes 
+        text_height = 100 # Geschätzte Höhe des Textes 
+        if not introfinished2 and 1770 < pos[0] < 1770  + text_width and 835 < pos[1] < 835 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            introfinished2 = True
+        
+    elif not introfinished3:
+        text_width = 100  # Geschätzte Breite des Textes 
+        text_height = 100 # Geschätzte Höhe des Textes 
+        if not introfinished3 and 1770 < pos[0] < 1770  + text_width and 835 < pos[1] < 835 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            introfinished3 = True
+            
+    elif not introfinished4:
         text_width = 80  # Geschätzte Breite des Textes 
         text_height = 40 # Geschätzte Höhe des Textes 
         if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
             introfinished4 = True
             startgame = True
-          
+                     
 music()
 pgzrun.go()
