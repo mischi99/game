@@ -183,8 +183,9 @@ def draw():
         screen.blit("gamedirections", (0, 0)) #fügt hintergrundbild mashrooms ein.
         screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-    
+        
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+        screen.blit("arrow", (1800, 1800))
         screen.blit("firstbackground6", (0, 0))
         squirrelintro1.draw()
         screen.blit("firstbackground6.1", (0,0))
