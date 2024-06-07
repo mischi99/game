@@ -185,8 +185,8 @@ def draw():
         screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("arrow", (1800, 1800))
         screen.blit("firstbackground6", (0, 0))
+        screen.blit("arrow", (1700, 750))
         squirrelintro1.draw()
         screen.blit("firstbackground6.1", (0,0))
         speechbubbleintro1.draw()
@@ -404,7 +404,7 @@ def powerup_star():
             star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             
-def on_mouse_down(pos):
+def on_mouse_down1(pos):
     global introfinished4, startgame
     text_width = 80  # Geschätzte Breite des Textes 
     text_height = 40 # Geschätzte Höhe des Textes 
