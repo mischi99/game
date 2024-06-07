@@ -239,7 +239,7 @@ def update():
         powerup_star()
         jump()
     
-    if starcounter == 10:
+    if starcounter == 1:
         startgame = False
                
 def movebridge():
