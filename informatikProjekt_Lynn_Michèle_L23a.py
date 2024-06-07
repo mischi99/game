@@ -404,13 +404,14 @@ def powerup_star():
             star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             
-def on_mouse_down1(pos):
+def on_mouse_down(pos):
     global introfinished4, startgame
-    text_width = 80  # Geschätzte Breite des Textes 
-    text_height = 40 # Geschätzte Höhe des Textes 
-    if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
-        introfinished4 = True
-        startgame = True
+    if not introfinished4:
+        text_width = 80  # Geschätzte Breite des Textes 
+        text_height = 40 # Geschätzte Höhe des Textes 
+        if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            introfinished4 = True
+            startgame = True
           
 music()
 pgzrun.go()
