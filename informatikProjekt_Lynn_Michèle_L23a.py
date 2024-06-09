@@ -86,8 +86,6 @@ box1 = Actor("box2.png")
 box1.x = 420
 box1.y = 535
 
-
-
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
 lightningfull.y = random.randrange(HEIGHT)
@@ -100,6 +98,17 @@ powerupnumber = 0
 star = Actor ("starforgametiny.png")
 star.x = random.randrange(WIDTH)
 star.y = random.randrange(HEIGHT)
+
+#Herz
+herz1 = Actor("herz1.png")
+herz1.x = 264
+herz1.y = 35
+herz2 = Actor("herz1.png")
+herz2.x = 304
+herz2.y = 35
+herz3 = Actor("herzgrey.png")
+herz3.x = 344
+herz3.y = 35
 
 activestar = False
 timestar = 0
@@ -115,14 +124,11 @@ introfinished4 = False
 startgame = False
 starttext = False
 
-#hüpfen
-jump_speed = -10
-gravity = 0.5
-jumpstart = 0
-jumping = False
-
 #zurückgelegte distanz
 distance = 0
+
+#leben
+fairy.leben = 3
 
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
@@ -134,14 +140,18 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-    
+    herz1.draw()
+    herz2.draw()
+    herz3.draw()
     bridge1.draw()
     bridge4.draw()
     bridge6.draw()
     bridge8.draw()
     fairy.draw()
+    
     box.draw()
     box1.draw()
+    
     kostuemwechseln()
     bridge2.draw()
     bridge3.draw()
@@ -212,8 +222,10 @@ def draw():
         screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished4: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("backgroundtransparent", (0, 0))
-        screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.blit("gamedirections", (0, 0))
+        screen.blit("glow", (0, 0))
+        screen.blit("button", (WIDTH/2, HEIGHT/2))
+        screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
@@ -249,14 +261,36 @@ def update():
         movefigure()
         powerup_lightning()
         powerup_star()
-        jump()
+        boxcollosion()
+        moveboxe()
     
     if starcounter == 1:
         startgame = False
-               
+        
+    if fairy.leben > 0:
+        herz3.draw()
+    if fairy.leben > 1:
+        herz2.draw()
+    if fairy.leben > 2:
+        herz1.draw()
+    if fairy.leben < 1:
+        screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
+        
+def boxcollosion():
+    global fairy
+    if fairy.colliderect(box) or fairy.colliderect(box1):  # Überprüfe Kollision mit einer der Boxen
+        if fairy.y + fairy.height <= box.y:  # Wenn die Fee über der Box ist
+            fairy.y = box.y - fairy.height  # Setze die Fee über die Box
+        else:
+            fairy.leben = fairy.leben - 1  # Ansonsten ziehe ein Leben ab
+            if fairy.colliderect(box):  # Stelle sicher, dass die Fee nicht hinter der Box durchgeht
+                fairy.right = min(fairy.right, box.left)  # Setze die Fee auf die rechte Seite der Box
+            elif fairy.colliderect(box1):
+                fairy.left = max(fairy.left, box1.right)
+            
 def movebridge():
     global distance
-    bridgespeed = 5
+    bridgespeed = 8
     bridge1.x = bridge1.x - bridgespeed
     bridge2.x = bridge2.x - bridgespeed
     bridge3.x = bridge3.x - bridgespeed
@@ -287,7 +321,7 @@ def movebridge():
         bridge8.left = bridge5.right
            
 def movebackground():
-    speedbackground = 5
+    speedbackground = 8
     background.x = background.x - speedbackground
     background1.x = background1.x - speedbackground
     
@@ -356,24 +390,17 @@ def movefigure():
         
     fairy.bottom = min(fairy.bottom, 800)
     
-def jump():
-    global jumpstart, jumping
+def moveboxe():
+    # Bewege die Boxen nach links
+    box.x -= 8
+    box1.x -= 8
     
-    if keyboard.m and not jumping:
-        jumpstart = jump_speed
-        jumping = True
-
-    # Schwerkraft anwenden
-    if jumping:
-        fairy.y = fairy.y + jumpstart
-        jumpstart = jumpstart + gravity
-
-        # Bodenberührung prüfen
-        if fairy.y >= 730:
-            fairy.y = 730
-            jumping = False
-            jumpstart = 0
-
+    # Überprüfe, ob die Boxen den Bildschirmrand verlassen haben, und setze sie zurück, falls erforderlich
+    if box.right < 0:
+        box.x = WIDTH
+    if box1.right < 0:
+        box1.x = WIDTH
+    
 def powerup_lightning():
     global activelightning, timelightning, powerupnumber
 
