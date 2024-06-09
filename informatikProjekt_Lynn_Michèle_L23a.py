@@ -78,6 +78,16 @@ fairy = Actor("frame-022.gif")
 fairy.x = 100
 fairy.y = 500
 
+box = Actor("box1.png")
+box.x = 400
+box.y = 660
+
+box1 = Actor("box2.png")
+box1.x = 420
+box1.y = 535
+
+
+
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
 lightningfull.y = random.randrange(HEIGHT)
@@ -130,6 +140,8 @@ def draw():
     bridge6.draw()
     bridge8.draw()
     fairy.draw()
+    box.draw()
+    box1.draw()
     kostuemwechseln()
     bridge2.draw()
     bridge3.draw()
