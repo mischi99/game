@@ -332,40 +332,40 @@ def movebackground():
 
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if fairy.image == "frame-033.gif":
-        fairy.image = "frame-034.gif"
+    if fairy.image == "frame-033.svg":
+        fairy.image = "frame-034.svg"
         time.sleep(0.1)
                   
-    elif fairy.image == "frame-034.gif":
-        fairy.image = "frame-035.gif"
+    elif fairy.image == "frame-034.svg":
+        fairy.image = "frame-035.svg"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-035.gif":
-        fairy.image = "frame-036.gif"
+    elif fairy.image == "frame-035.svg":
+        fairy.image = "frame-036.svg"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-036.gif":
-        fairy.image = "frame-037.gif"
+    elif fairy.image == "frame-036.svg":
+        fairy.image = "frame-037.svg"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-037.gif":
-        fairy.image = "frame-038.gif"
+    elif fairy.image == "frame-037.svg":
+        fairy.image = "frame-038.svg"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-038.gif":
-        fairy.image = "frame-039.gif"
+    elif fairy.image == "frame-038.svg":
+        fairy.image = "frame-039.svg"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-039.gif":
-        fairy.image = "frame-040.gif"
+    elif fairy.image == "frame-039.svg":
+        fairy.image = "frame-040.svg"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-040.gif":
-        fairy.image = "frame-041.gif"
+    elif fairy.image == "frame-040.svg":
+        fairy.image = "frame-041.svg"
         time.sleep(0.1)
             
     else:
-        fairy.image = "frame-033.gif"
+        fairy.image = "frame-033.svg"
         time.sleep(0.1)
 
 def movefigure():
