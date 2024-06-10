@@ -332,40 +332,40 @@ def movebackground():
 
 # Kostümwechsel zwischen mensch1 und mensch2
 def kostuemwechseln():
-    if fairy.image == "frame-033.svg":
-        fairy.image = "frame-034.svg"
+    if fairy.image == "frame-033.gif":
+        fairy.image = "frame-034.gif"
         time.sleep(0.1)
                   
-    elif fairy.image == "frame-034.svg":
-        fairy.image = "frame-035.svg"
+    elif fairy.image == "frame-034.gif":
+        fairy.image = "frame-035.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-035.svg":
-        fairy.image = "frame-036.svg"
+    elif fairy.image == "frame-035.gif":
+        fairy.image = "frame-036.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-036.svg":
-        fairy.image = "frame-037.svg"
+    elif fairy.image == "frame-036.gif":
+        fairy.image = "frame-037.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-037.svg":
-        fairy.image = "frame-038.svg"
+    elif fairy.image == "frame-037.gif":
+        fairy.image = "frame-038.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-038.svg":
-        fairy.image = "frame-039.svg"
+    elif fairy.image == "frame-038.gif":
+        fairy.image = "frame-039.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-039.svg":
-        fairy.image = "frame-040.svg"
+    elif fairy.image == "frame-039.gif":
+        fairy.image = "frame-040.gif"
         time.sleep(0.1)
         
-    elif fairy.image == "frame-040.svg":
-        fairy.image = "frame-041.svg"
+    elif fairy.image == "frame-040.gif":
+        fairy.image = "frame-041.gif"
         time.sleep(0.1)
             
     else:
-        fairy.image = "frame-033.svg"
+        fairy.image = "frame-033.gif"
         time.sleep(0.1)
 
 def movefigure():
@@ -472,6 +472,7 @@ def on_mouse_down(pos):
         if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
             introfinished4 = True
             startgame = True
-                     
+def gameover():
+    ...
 music()
 pgzrun.go()
