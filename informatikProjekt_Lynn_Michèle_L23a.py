@@ -226,6 +226,10 @@ def draw():
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+    
+    if starcounter == 1:
+        gameover()
+        startgame = False
         
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
@@ -263,10 +267,7 @@ def update():
         powerup_star()
         boxcollosion()
         moveboxe()
-    
-    if starcounter == 1:
-        startgame = False
-        
+           
     if fairy.leben > 0:
         herz3.draw()
     if fairy.leben > 1:
@@ -275,7 +276,10 @@ def update():
         herz1.draw()
     if fairy.leben < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-        
+
+    if starcounter == 1:
+        startgame = False
+                
 def boxcollosion():
     global fairy
     if fairy.colliderect(box) or fairy.colliderect(box1):  # Überprüfe Kollision mit einer der Boxen
@@ -472,7 +476,14 @@ def on_mouse_down(pos):
         if not introfinished4 and WIDTH/2 < pos[0] < WIDTH/2 + text_width and HEIGHT/2 < pos[1] < HEIGHT/2 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
             introfinished4 = True
             startgame = True
+            
 def gameover():
-    ...
+    screen.clear()
+    screen.draw.text("Game Over", left=500, top=500, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="left")
+    screen.blit("gamedirections",(0,0))
+   
+        
+    
+        
 music()
 pgzrun.go()
