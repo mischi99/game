@@ -1,7 +1,7 @@
 import pygame.mixer
 import os
-os.environ["SDL_VIDEO_CENTERED"] = "0, 35"
-os.environ["SDL_VIDEO_FULLSCREEN_DISPLAY"] = "0"
+os.environ["SDL_VIDEO_CENTERED"] = "0, 0"
+
 
 import random
 import time
@@ -127,8 +127,8 @@ starttext = False
 #zurückgelegte distanz
 distance = 0
 
-#leben
-fairy.leben = 3
+#life
+fairy.life = 3
 
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
@@ -201,12 +201,12 @@ def draw():
 #         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
 #     
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
-        screen.blit("gamedirections", (0, 0)) #fügt hintergrundbild mashrooms ein.
+        screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
         screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
-    elif not introfinished2: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+    elif not introfinished2: 
         screen.blit("firstbackground6", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
         squirrelintro1.draw()
@@ -214,25 +214,25 @@ def draw():
         speechbubbleintro1.draw()
         screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
-    elif not introfinished3: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+    elif not introfinished3: 
         screen.blit("backgroundnew", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
         troll.draw()
         speechbubblemirrored.draw()
         screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
-    elif not introfinished4: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+    elif not introfinished4:
         screen.blit("gamedirections", (0, 0))
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
     if starcounter == 1:
-        gameover()
         startgame = False
+        gameover()
         
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit das False der Variable introfinished1, stargame und starttext überschrieben werden darf   
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
      
 #     if keyboard.tab:
 #         if not introfinished1 and not introfinished2 and not introfinished3:
@@ -268,16 +268,17 @@ def update():
         boxcollosion()
         moveboxe()
            
-    if fairy.leben > 0:
+    if fairy.life > 0:
         herz3.draw()
-    if fairy.leben > 1:
+    if fairy.life > 1:
         herz2.draw()
-    if fairy.leben > 2:
+    if fairy.life > 2:
         herz1.draw()
-    if fairy.leben < 1:
+    if fairy.life < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
 
-    if starcounter == 1:
+    if starcounter == 1 and fairy.life <= 0:
+        gameover()
         startgame = False
                 
 def boxcollosion():
@@ -286,7 +287,7 @@ def boxcollosion():
         if fairy.y + fairy.height <= box.y:  # Wenn die Fee über der Box ist
             fairy.y = box.y - fairy.height  # Setze die Fee über die Box
         else:
-            fairy.leben = fairy.leben - 1  # Ansonsten ziehe ein Leben ab
+            fairy.life = fairy.life - 1  # Ansonsten ziehe ein life ab
             if fairy.colliderect(box):  # Stelle sicher, dass die Fee nicht hinter der Box durchgeht
                 fairy.right = min(fairy.right, box.left)  # Setze die Fee auf die rechte Seite der Box
             elif fairy.colliderect(box1):
@@ -478,9 +479,11 @@ def on_mouse_down(pos):
             startgame = True
             
 def gameover():
-    screen.clear()
-    screen.draw.text("Game Over", left=500, top=500, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="left")
-    screen.blit("gamedirections",(0,0))
-        
+    global fairy
+    screen.fill((0, 0, 0))
+    screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=60,color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    fairy.life = 0
+            
 music()
 pgzrun.go()
