@@ -203,8 +203,12 @@ def draw():
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
+        screen.blit("heart", (1075, 537))
+        screen.blit("lightningfull", (1160, 570))
+        screen.blit("starforgametiny.png", (1350, 618))
+        screen.blit("steering", (750, 650))
         screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("...", left=930, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Herz = Leben\nBlitz = Schnelligkeitszunahme\nSterne = Punkte zähler; Ab 100 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=600, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: 
         screen.blit("firstbackground6", (0, 0))
