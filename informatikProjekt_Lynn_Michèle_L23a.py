@@ -481,9 +481,6 @@ def gameover():
     screen.clear()
     screen.draw.text("Game Over", left=500, top=500, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="left")
     screen.blit("gamedirections",(0,0))
-   
-        
-    
         
 music()
 pgzrun.go()
