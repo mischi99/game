@@ -12,7 +12,7 @@ HEIGHT = 985
 TITLE = "Informatik Projekt - Designed by Lynn and Michèle"
 
 #squirrel
-squirrel = Actor("squirrel.pn")
+squirrel = Actor("squirrel.png")
 squirrel.x = 400
 squirrel.y = 775
 
