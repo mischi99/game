@@ -203,12 +203,12 @@ def draw():
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
-        screen.blit("heart", (1075, 537))
-        screen.blit("lightningfull", (1160, 570))
-        screen.blit("starforgametiny.png", (1350, 618))
-        screen.blit("steering", (750, 650))
-        screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("Herz = Leben\nBlitz = Schnelligkeitszunahme\nSterne = Punkte zähler; Ab 100 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=600, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.blit("heart", (890, 300))
+        screen.blit("lightningfull", (775, 340))
+        screen.blit("starforgametiny.png", (560, 390))
+        screen.blit("steering", (760, 550))
+        screen.draw.text("Spielanleitung", left=800, top=200, fontsize=60, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("= Leben\n= Schnelligkeitszunahme\n= Punkte zähler; Ab 100 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: 
         screen.blit("firstbackground6", (0, 0))
@@ -237,32 +237,7 @@ def draw():
         
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
-     
-#     if keyboard.tab:
-#         if not introfinished1 and not introfinished2 and not introfinished3:
-#             introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
-#             introfinished2 = False
-#             introfinished3 = False
-#             introfinished4 = False
-#             startgame = False
-#             starttext = True
-#             
-#         elif  introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#             introfinished1 = True
-#             introfinished2 = True
-#             introfinished3 = False
-#             introfinished4 = False
-#             startgame = False
-#             starttext = False
-#             
-#         elif introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#             introfinished1 = True
-#             introfinished2 = True
-#             introfinished3 = True
-#             introfinished4 = False 
-#             startgame = False
-#             starttext = False                
-      
+                
     if startgame:
         movebridge()
         movebackground()
