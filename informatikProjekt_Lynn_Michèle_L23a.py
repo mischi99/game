@@ -130,6 +130,9 @@ distance = 0
 #life
 fairy.life = 3
 
+#gameover
+gameover = False
+
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
@@ -230,13 +233,10 @@ def draw():
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
-#     if starcounter == 1:
-#         startgame = False
-#         gameover()
+       
         
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
                 
     if startgame:
         movebridge()
@@ -255,14 +255,21 @@ def update():
         herz1.draw()
     if fairy.life < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-
+    
+    if gameover == True:
+        gameover()
+        
     if fairy.life <= 0:  # Wenn keine Leben mehr übrig sind
-            gameover()
+            gameover = True
             startgame = False
     
     if starcounter >= 100:  # Wenn 100 Sterne erreicht wurden
             next_level()  # Funktion aufrufen, um zum nächsten Level zu gelangen
-                
+    
+    if starcounter == 1:
+        gameover = False
+        startgame = False
+        
 def boxcollosion():
     global fairy
     
@@ -439,7 +446,7 @@ def powerup_star():
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             
 def on_mouse_down(pos):
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
     
     if not introfinished1:
         text_width = 100  # Geschätzte Breite des Textes 
@@ -467,12 +474,21 @@ def on_mouse_down(pos):
             introfinished4 = True
             startgame = True
             
+    if gameover:
+        text_width = 100  # Geschätzte Breite des Textes 
+        text_height = 100 # Geschätzte Höhe des Textes 
+        if not gameover and 720 < pos[0] < 720 + text_width and 650 < pos[1] < 650 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            screen.draw.text("Suuppii", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+            
 def gameover():
     global fairy
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=60,color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     fairy.life = 0
+    screen.blit("replay", (720, 650))
+    screen.blit("arrowblack", (1200, 650))
+    gameover = True
             
 def next_level():
     global bridgespeed, speedbackground, starcounter
