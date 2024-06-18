@@ -138,8 +138,8 @@ def music():
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
 
 def draw():
-    global powerupnumber, starcount
-    
+    global powerupnumber, starcounter, gameover
+        
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
@@ -233,7 +233,12 @@ def draw():
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-       
+    
+    if star == 1:
+        if gameover:
+            screen.fill((0, 0, 0))
+            screen.draw.text("Game Over", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255, 0, 0), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    
         
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
@@ -255,10 +260,7 @@ def update():
         herz1.draw()
     if fairy.life < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-    
-    if gameover == True:
-        gameover()
-        
+           
     if fairy.life <= 0:  # Wenn keine Leben mehr übrig sind
             gameover = True
             startgame = False
@@ -482,13 +484,14 @@ def on_mouse_down(pos):
             
 def gameover():
     global fairy
+    gameover = True
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=60,color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     fairy.life = 0
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
-    gameover = True
+    
             
 def next_level():
     global bridgespeed, speedbackground, starcounter
