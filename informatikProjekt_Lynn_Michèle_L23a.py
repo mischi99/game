@@ -233,7 +233,10 @@ def draw():
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-       
+
+    if starcounter == 1:
+        startgame = False
+        gameover()
         
 def update():
     global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
@@ -255,39 +258,40 @@ def update():
         herz1.draw()
     if fairy.life < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-    
-    if gameover == True:
+# <<<<<<< HEAD
+#     
+#     if gameover == True:
+#         gameover()
+#         
+#     if fairy.life <= 0:  # Wenn keine Leben mehr übrig sind
+#             gameover = True
+#             startgame = False
+#     
+#     if starcounter >= 100:  # Wenn 100 Sterne erreicht wurden
+#             next_level()  # Funktion aufrufen, um zum nächsten Level zu gelangen
+#     
+#     if starcounter == 1:
+#         gameover = False
+#         startgame = False
+#         
+# =======
+
+    if starcounter == 1 and fairy.life <= 0:
         gameover()
-        
-    if fairy.life <= 0:  # Wenn keine Leben mehr übrig sind
-            gameover = True
-            startgame = False
-    
-    if starcounter >= 100:  # Wenn 100 Sterne erreicht wurden
-            next_level()  # Funktion aufrufen, um zum nächsten Level zu gelangen
-    
-    if starcounter == 1:
-        gameover = False
         startgame = False
-        
+                
+
 def boxcollosion():
     global fairy
-    
     if fairy.colliderect(box) or fairy.colliderect(box1):  # Überprüfe Kollision mit einer der Boxen
         if fairy.y + fairy.height <= box.y:  # Wenn die Fee über der Box ist
             fairy.y = box.y - fairy.height  # Setze die Fee über die Box
         else:
-            if fairy.colliderect(box):  # Kollision mit der ersten Box
-                if fairy.x < box.x:  # Von links kommend
-                    fairy.right = box.left  # Setze die Fee auf die rechte Seite der Box
-                else:  # Von rechts kommend
-                    fairy.left = box.right  # Setze die Fee auf die linke Seite der Box
-            
-            elif fairy.colliderect(box1):  # Kollision mit der zweiten Box
-                if fairy.x < box1.x:  # Von links kommend
-                    fairy.right = box1.left  # Setze die Fee auf die rechte Seite der Box
-                else:  # Von rechts kommend
-                    fairy.left = box1.right  # Setze die Fee auf die linke Seite der Box
+            fairy.life = fairy.life - 1  # Ansonsten ziehe ein life ab
+            if fairy.colliderect(box):  # Stelle sicher, dass die Fee nicht hinter der Box durchgeht
+                fairy.right = min(fairy.right, box.left)  # Setze die Fee auf die rechte Seite der Box
+            elif fairy.colliderect(box1):
+                fairy.left = max(fairy.left, box1.right)
             
 def movebridge():
     global distance
@@ -490,16 +494,5 @@ def gameover():
     screen.blit("arrowblack", (1200, 650))
     gameover = True
             
-def next_level():
-    global bridgespeed, speedbackground, starcounter
-    
-    # Beispiel: Erhöhe die Geschwindigkeit der Brückenbewegung und des Hintergrunds für das nächste Level
-    bridgespeed = 12  
-    speedbackground = 12  
-    
-    # Setze Sternezähler zurück und starte das Spiel erneut
-    starcounter = 0
-    startgame = True
-    
 music()
 pgzrun.go()
