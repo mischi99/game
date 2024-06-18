@@ -102,13 +102,13 @@ star.y = random.randrange(HEIGHT)
 #Herz
 herz1 = Actor("herz1.png")
 herz1.x = 264
-herz1.y = 43
+herz1.y = 35
 herz2 = Actor("herz1.png")
-herz2.x = 314
-herz2.y = 43
+herz2.x = 304
+herz2.y = 35
 herz3 = Actor("herzgrey.png")
-herz3.x = 364
-herz3.y = 43
+herz3.x = 344
+herz3.y = 35
 
 activestar = False
 timestar = 0
@@ -130,10 +130,9 @@ distance = 0
 #life
 fairy.life = 3
 
-#Geist
-ghost = Actor("ghostfinal1.png")
-ghost.x = 500
-ghost.y = 500
+#gameover
+gameover = False
+
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
     pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
@@ -207,12 +206,12 @@ def draw():
     if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
-        screen.blit("heart", (1075, 537))
-        screen.blit("lightningfull", (1160, 570))
-        screen.blit("starforgametiny.png", (1350, 618))
-        screen.blit("steering", (750, 650))
-        screen.draw.text("Spielanleitung", left=800, top=HEIGHT/2 - 50, fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("Herz = Leben\nBlitz = Schnelligkeitszunahme\nSterne = Punkte zähler; Ab 100 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=600, top=HEIGHT/2 + 50, fontsize=30, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.blit("heart", (890, 300))
+        screen.blit("lightningfull", (775, 340))
+        screen.blit("starforgametiny.png", (560, 390))
+        screen.blit("steering", (760, 550))
+        screen.draw.text("Spielanleitung", left=800, top=200, fontsize=60, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("= Leben\n= Schnelligkeitszunahme\n= Punkte zähler; Ab 100 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: 
         screen.blit("firstbackground6", (0, 0))
@@ -234,39 +233,11 @@ def draw():
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
-    if starcounter == 1:
-        startgame = False
-        gameover()
+       
         
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
-     
-#     if keyboard.tab:
-#         if not introfinished1 and not introfinished2 and not introfinished3:
-#             introfinished1 = True #prüft andauernd ob space taste gedrückt wurde, und setzt indiesem Falle den wert introfinished1 bei drücken der Taste auf True, wodurch if not introfinished1 gleich false ist, denn + und - = -
-#             introfinished2 = False
-#             introfinished3 = False
-#             introfinished4 = False
-#             startgame = False
-#             starttext = True
-#             
-#         elif  introfinished1 and not introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#             introfinished1 = True
-#             introfinished2 = True
-#             introfinished3 = False
-#             introfinished4 = False
-#             startgame = False
-#             starttext = False
-#             
-#         elif introfinished1 and introfinished2 and not introfinished3 and not introfinished4 and not startgame: # wenn die Leertaste gedrückt wird und das intro fertig ist, jedoch das game nch nicht gestartet wurde, soll der Starttext angezeigt werden
-#             introfinished1 = True
-#             introfinished2 = True
-#             introfinished3 = True
-#             introfinished4 = False 
-#             startgame = False
-#             starttext = False                
-      
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
+                
     if startgame:
         movebridge()
         movebackground()
@@ -284,23 +255,40 @@ def update():
         herz1.draw()
     if fairy.life < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-
-    if starcounter == 1 and fairy.life <= 0:
+    
+    if gameover == True:
         gameover()
+        
+    if fairy.life <= 0:  # Wenn keine Leben mehr übrig sind
+            gameover = True
+            startgame = False
+    
+    if starcounter >= 100:  # Wenn 100 Sterne erreicht wurden
+            next_level()  # Funktion aufrufen, um zum nächsten Level zu gelangen
+    
+    if starcounter == 1:
+        gameover = False
         startgame = False
-                
+        
 def boxcollosion():
     global fairy
+    
     if fairy.colliderect(box) or fairy.colliderect(box1):  # Überprüfe Kollision mit einer der Boxen
         if fairy.y + fairy.height <= box.y:  # Wenn die Fee über der Box ist
             fairy.y = box.y - fairy.height  # Setze die Fee über die Box
         else:
-            fairy.life = fairy.life - 1  # Ansonsten ziehe ein life ab
-            if fairy.colliderect(box):  # Stelle sicher, dass die Fee nicht hinter der Box durchgeht
-                fairy.right = min(fairy.right, box.left)  # Setze die Fee auf die rechte Seite der Box
-            elif fairy.colliderect(box1):
-                fairy.left = max(fairy.left, box1.right)
-
+            if fairy.colliderect(box):  # Kollision mit der ersten Box
+                if fairy.x < box.x:  # Von links kommend
+                    fairy.right = box.left  # Setze die Fee auf die rechte Seite der Box
+                else:  # Von rechts kommend
+                    fairy.left = box.right  # Setze die Fee auf die linke Seite der Box
+            
+            elif fairy.colliderect(box1):  # Kollision mit der zweiten Box
+                if fairy.x < box1.x:  # Von links kommend
+                    fairy.right = box1.left  # Setze die Fee auf die rechte Seite der Box
+                else:  # Von rechts kommend
+                    fairy.left = box1.right  # Setze die Fee auf die linke Seite der Box
+            
 def movebridge():
     global distance
     bridgespeed = 8
@@ -458,7 +446,7 @@ def powerup_star():
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             
 def on_mouse_down(pos):
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame
+    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
     
     if not introfinished1:
         text_width = 100  # Geschätzte Breite des Textes 
@@ -486,12 +474,32 @@ def on_mouse_down(pos):
             introfinished4 = True
             startgame = True
             
+    if gameover:
+        text_width = 100  # Geschätzte Breite des Textes 
+        text_height = 100 # Geschätzte Höhe des Textes 
+        if not gameover and 720 < pos[0] < 720 + text_width and 650 < pos[1] < 650 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            screen.draw.text("Suuppii", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+            
 def gameover():
     global fairy
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=60,color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     fairy.life = 0
-
+    screen.blit("replay", (720, 650))
+    screen.blit("arrowblack", (1200, 650))
+    gameover = True
+            
+def next_level():
+    global bridgespeed, speedbackground, starcounter
+    
+    # Beispiel: Erhöhe die Geschwindigkeit der Brückenbewegung und des Hintergrunds für das nächste Level
+    bridgespeed = 12  
+    speedbackground = 12  
+    
+    # Setze Sternezähler zurück und starte das Spiel erneut
+    starcounter = 0
+    startgame = True
+    
 music()
 pgzrun.go()
