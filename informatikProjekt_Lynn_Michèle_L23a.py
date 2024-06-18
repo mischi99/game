@@ -258,24 +258,7 @@ def update():
         herz1.draw()
     if fairy.life < 1:
         screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-# <<<<<<< HEAD
-#     
-#     if gameover == True:
-#         gameover()
-#         
-#     if fairy.life <= 0:  # Wenn keine Leben mehr übrig sind
-#             gameover = True
-#             startgame = False
-#     
-#     if starcounter >= 100:  # Wenn 100 Sterne erreicht wurden
-#             next_level()  # Funktion aufrufen, um zum nächsten Level zu gelangen
-#     
-#     if starcounter == 1:
-#         gameover = False
-#         startgame = False
-#         
-# =======
-
+        
     if starcounter == 1 and fairy.life <= 0:
         gameover()
         startgame = False
