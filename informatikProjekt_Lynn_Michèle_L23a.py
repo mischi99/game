@@ -115,6 +115,7 @@ timestar = 0
 starcounter = 0
 
 #intro
+introfinished0 = False
 introfinished1 = False
 introfinished2 = False
 introfinished3 = False
@@ -203,7 +204,14 @@ def draw():
 #         screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
 #         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
 #     
-    if not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
+    if not introfinished0:
+        screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
+        screen.blit("arrowblack", (1770, 835))
+        screen.draw.text("Game ", left=800, top=200, fontsize=60, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Game", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        
+
+    elif not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
         screen.blit("heart", (890, 300))
@@ -239,7 +247,7 @@ def draw():
         gameover()
         
 def update():
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
+    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
                 
     if startgame:
         movebridge()
@@ -433,9 +441,16 @@ def powerup_star():
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             
 def on_mouse_down(pos):
-    global introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
+    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
     
-    if not introfinished1:
+    if not introfinished0:
+        text_width = 100  # Geschätzte Breite des Textes 
+        text_height = 100 # Geschätzte Höhe des Textes 
+        if not introfinished0 and 1770 < pos[0] < 1770  + text_width and 835 < pos[1] < 835 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
+            introfinished0 = True
+            startgame = False
+            
+    elif not introfinished1:
         text_width = 100  # Geschätzte Breite des Textes 
         text_height = 100 # Geschätzte Höhe des Textes 
         if not introfinished1 and 1770 < pos[0] < 1770  + text_width and 835 < pos[1] < 835 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
@@ -467,6 +482,7 @@ def on_mouse_down(pos):
         if not gameover and 720 < pos[0] < 720 + text_width and 650 < pos[1] < 650 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
             screen.draw.text("Suuppii", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
             
+
 def gameover():
     global fairy
     screen.fill((0, 0, 0))
