@@ -79,13 +79,13 @@ fairy.x = 100
 fairy.y = 500
 fairy.leben = 3
 
-box = Actor("ghost1.png")
-box.x = 400
-box.y = 660
+ghost = Actor("ghost1.png")
+ghost.x = 400
+ghost.y = 660
 
-# box1 = Actor("box2.png")
-# box1.x = 420
-# box1.y = 535
+# ghost1 = Actor("ghost2.png")
+# ghost1.x = 420
+# ghost1.y = 535
 
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
@@ -154,8 +154,8 @@ def draw():
     bridge8.draw()
     fairy.draw()
     
-    box.draw()
-#     box1.draw()
+    ghost.draw()
+#     ghost1.draw()
     
     kostuemwechseln()
     bridge2.draw()
@@ -238,9 +238,10 @@ def draw():
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
-    if starcounter == 1:
+    if starcounter == 2:
         startgame = False
         gameover()
+        
     if startgame == True:    
         if fairy.life >= 3:
             screen.blit("herz1.png", (264, 43))
@@ -268,8 +269,8 @@ def update():
         movefigure()
         powerup_lightning()
         powerup_star()
-        boxcollision(box)  # Hier wird die Funktion für die Kollision zwischen Fee und Box aufgerufen
-        moveboxe()
+        ghostcollision(ghost)  # Hier wird die Funktion für die Kollision zwischen Fee und ghost aufgerufen
+        moveghoste()
            
 #     if fairy.life > 0:
 #         herz1.draw()
@@ -284,16 +285,16 @@ def update():
         gameover()
                 
         
-def boxcollision(box):
+def ghostcollision(ghost):
     global fairy
     
-    box.x = box.x + 10
-    if box.x > HEIGHT + 350:
-        box.x = -200
+    ghost.x = ghost.x + 10
+    if ghost.x > HEIGHT + 350:
+        ghost.x = -200
     
-    if box.colliderect(fairy):
-        fairy.life = fairy.life - 1  # Ein Leben wird abgezogen, wenn die Fee mit der Box kollidiert
-        box.x = -200  # Zurücksetzen der Boxposition nach Kollision
+    if ghost.colliderect(fairy):
+        fairy.life = fairy.life - 1  # Ein Leben wird abgezogen, wenn die Fee mit der ghost kollidiert
+        ghost.x = -200  # Zurücksetzen der ghostposition nach Kollision
         
         if fairy.life == 3:
             screen.blit("herz1.png", (264, 43))
@@ -414,53 +415,59 @@ def movefigure():
         
     fairy.bottom = min(fairy.bottom, 800)
     
-def moveboxe():
-    box.x = box.x - 20
-    if box.left < 0:
-        box.x = WIDTH + 100
+def moveghoste():
+    global ghost
     
+    ghost.x -= 20  # Bewegt die ghost um 20 Pixel nach links
+    
+    if ghost.right < 0:  # Wenn die rechte Seite der ghost den linken Bildschirmrand überschreitet
+        ghost.x = WIDTH   # Setzt die ghost auf die rechte Seite des Bildschirms
+        ghost.x -= 40     # Verschiebt die ghost weiter nach links, um sicherzustellen, dass sie nicht sofort wieder den linken Bildschirmrand erreicht
+        
 def powerup_lightning():
     global activelightning, timelightning, powerupnumber
 
     lightningfull.x = lightningfull.x - 5
     lightningfull.bottom = min(lightningfull.bottom, 730)
     lightningfull.top = max(lightningfull.top, 100)
-    
+
     currenttime = time.time() # time.time() Anzahl der Sekunden
-    
+
     if not activelightning and currenttime - timelightning > 10: #10 ist die zeit in Sekunden, danach kommt ein neuer powerup
         lightningfull.x = 1920
         lightningfull.y = random.randrange(HEIGHT)
-        
+
         activelightning = True
         timelightning = currenttime
-    
+
     if fairy.colliderect(lightningfull):
         activelightning = False
         lightningfull.x = -100
         powerupnumber = powerupnumber + 1
-        
+        lightningfull.x = WIDTH - 200  # Zurücksetzen der Position des Powerups nach Kollision
+
 def powerup_star():
     global activestar, timestar, starcounter
 
     star.x = star.x - 10
     star.bottom = min(star.bottom, 730)
     star.top = max(star.top, 100)
-    
+
     currenttime = time.time()
-    
-    if not activestar and currenttime - timestar > 5: 
+
+    if not activestar and currenttime - timestar > 5:
         star.x = 1920
         star.y = random.randrange(HEIGHT)
-        
+
         activestar = True
         timestar = currenttime
-    
+
     if fairy.colliderect(star):
         if fairy.colliderect(star):
             activestar = False
             star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
+            star.x = WIDTH - 200  # Zurücksetzen der Position des Sterns nach Kollision
             
 def on_mouse_down(pos):
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
