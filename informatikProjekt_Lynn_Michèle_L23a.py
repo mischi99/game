@@ -77,14 +77,15 @@ bridge8.x = 2920 + 1920 + 1920
 fairy = Actor("frame-022.gif")
 fairy.x = 100
 fairy.y = 500
+fairy.leben = 3
 
-box = Actor("box1.png")
+box = Actor("ghost1.png")
 box.x = 400
 box.y = 660
 
-box1 = Actor("box2.png")
-box1.x = 420
-box1.y = 535
+# box1 = Actor("box2.png")
+# box1.x = 420
+# box1.y = 535
 
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
@@ -99,16 +100,16 @@ star = Actor ("starforgametiny.png")
 star.x = random.randrange(WIDTH)
 star.y = random.randrange(HEIGHT)
 
-#Herz
-herz1 = Actor("herz1.png")
-herz1.x = 264
-herz1.y = 35
-herz2 = Actor("herz1.png")
-herz2.x = 304
-herz2.y = 35
-herz3 = Actor("herzgrey.png")
-herz3.x = 344
-herz3.y = 35
+# #Herz
+# herz1 = Actor("herz1.png")
+# herz1.x = 264
+# herz1.y = 43
+# herz2 = Actor("herz1.png")
+# herz2.x = 314
+# herz2.y = 43
+# herz3 = Actor("herzgrey.png")
+# herz3.x = 364
+# herz3.y = 43
 
 activestar = False
 timestar = 0
@@ -136,17 +137,17 @@ gameover = False
 
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
-    pygame.mixer.music.play(2) #spielt die geladene Musik ab, (2) bedeutet, das die Musik 2x hintereinander abgespielt wird
+    pygame.mixer.music.play(-1) #spielt die geladene Musik ab, in diesem Fall unbestimmt lange. (2) würde bedeuten, das die Musik 2x hintereinander abgespielt wird
 
 def draw():
-    global powerupnumber, starcount
+    global powerupnumber, starcount, startgame
     
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-    herz1.draw()
-    herz2.draw()
-    herz3.draw()
+#     herz1.draw()
+#     herz2.draw()
+#     herz3.draw()
     bridge1.draw()
     bridge4.draw()
     bridge6.draw()
@@ -154,7 +155,7 @@ def draw():
     fairy.draw()
     
     box.draw()
-    box1.draw()
+#     box1.draw()
     
     kostuemwechseln()
     bridge2.draw()
@@ -199,11 +200,6 @@ def draw():
     #zurückgelegte Strecke
     screen.draw.text(f"Zurückgelegte Strecke: {distance/100} m", (20, 80), fontsize=40, color=(255, 255, 255))
    
-#     if starttext and not startgame: #wenn der starttext true ist und das startgame false, nur dann wird der Text angezeigt: also der Starttext soll angezeigt werden, wenn das Game noch nicht gestartet ist.
-#         white = 255, 255, 255
-#         screen.draw.text("Spiel beginnen", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center", )
-#         screen.draw.text("press the spacebar!", left=WIDTH/2 -120, top=HEIGHT/2 + 70, fontsize=30, color=white, fontname="..\\fonts\\handlee-regular.ttf", align="center", italic=True, )
-#     
     if not introfinished0:
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
@@ -245,44 +241,76 @@ def draw():
     if starcounter == 1:
         startgame = False
         gameover()
+    if startgame == True:    
+        if fairy.life >= 3:
+            screen.blit("herz1.png", (264, 43))
+            screen.blit("herz1.png", (314, 43))
+            screen.blit("herz1.png", (364, 43))
+        elif fairy.life == 2:
+            screen.blit("herz1.png", (264, 43))
+            screen.blit("herz1.png", (314, 43))
+            screen.blit("herzgrey.png", (364, 43))
+        elif fairy.life == 1:
+            screen.blit("herz1.png", (264, 43))
+            screen.blit("herzgrey.png", (314, 43))
+            screen.blit("herzgrey.png", (364, 43))
+        elif fairy.life <= 0:
+            screen.blit("herzgrey.png", (264, 43))
+            screen.blit("herzgrey.png", (314, 43))
+            screen.blit("herzgrey.png", (364, 43))    
         
 def update():
-    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy #damit die Variablen introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber überschrieben werden darf   
-                
+    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy
+    
     if startgame:
         movebridge()
         movebackground()
         movefigure()
         powerup_lightning()
         powerup_star()
-        boxcollosion()
+        boxcollision(box)  # Hier wird die Funktion für die Kollision zwischen Fee und Box aufgerufen
         moveboxe()
            
-    if fairy.life > 0:
-        herz3.draw()
-    if fairy.life > 1:
-        herz2.draw()
-    if fairy.life > 2:
-        herz1.draw()
+#     if fairy.life > 0:
+#         herz1.draw()
+#     if fairy.life > 1:
+#         herz2.draw()
+#         herz1.draw()
+#     if fairy.life > 2:
+#         herz3.draw()
+#         herz2.draw()
+#         herz1.draw()
     if fairy.life < 1:
-        screen.draw.text("Game Over", left=100 , top=384 , fontsize=50)
-        
-    if starcounter == 1 and fairy.life <= 0:
         gameover()
-        startgame = False
                 
-
-def boxcollosion():
+        
+def boxcollision(box):
     global fairy
-    if fairy.colliderect(box) or fairy.colliderect(box1):  # Überprüfe Kollision mit einer der Boxen
-        if fairy.y + fairy.height <= box.y:  # Wenn die Fee über der Box ist
-            fairy.y = box.y - fairy.height  # Setze die Fee über die Box
-        else:
-            fairy.life = fairy.life - 1  # Ansonsten ziehe ein life ab
-            if fairy.colliderect(box):  # Stelle sicher, dass die Fee nicht hinter der Box durchgeht
-                fairy.right = min(fairy.right, box.left)  # Setze die Fee auf die rechte Seite der Box
-            elif fairy.colliderect(box1):
-                fairy.left = max(fairy.left, box1.right)
+    
+    box.x = box.x + 10
+    if box.x > HEIGHT + 350:
+        box.x = -200
+    
+    if box.colliderect(fairy):
+        fairy.life = fairy.life - 1  # Ein Leben wird abgezogen, wenn die Fee mit der Box kollidiert
+        box.x = -200  # Zurücksetzen der Boxposition nach Kollision
+        
+        if fairy.life == 3:
+            screen.blit("herz1.png", (264, 43))
+            screen.blit("herz1.png", (314, 43))
+            screen.blit("herz1.png", (364, 43))
+        elif fairy.life == 2:
+            screen.blit("herz1.png", (264, 43))
+            screen.blit("herz1.png", (314, 43))
+            screen.blit("herzgrey.png", (364, 43))
+        elif fairy.life == 1:
+            screen.blit("herz1.png", (264, 43))
+            screen.blit("herzgrey.png", (314, 43))
+            screen.blit("herzgrey.png", (364, 43))
+        elif fairy.life < 1:
+            screen.blit("herzgrey.png", (264, 43))
+            screen.blit("herzgrey.png", (314, 43))
+            screen.blit("herzgrey.png", (364, 43))
             
 def movebridge():
     global distance
@@ -387,15 +415,9 @@ def movefigure():
     fairy.bottom = min(fairy.bottom, 800)
     
 def moveboxe():
-    # Bewege die Boxen nach links
-    box.x -= 8
-    box1.x -= 8
-    
-    # Überprüfe, ob die Boxen den Bildschirmrand verlassen haben, und setze sie zurück, falls erforderlich
-    if box.right < 0:
-        box.x = WIDTH
-    if box1.right < 0:
-        box1.x = WIDTH
+    box.x = box.x - 20
+    if box.left < 0:
+        box.x = WIDTH + 100
     
 def powerup_lightning():
     global activelightning, timelightning, powerupnumber
@@ -476,19 +498,37 @@ def on_mouse_down(pos):
             introfinished4 = True
             startgame = True
             
-    if gameover:
+    elif gameover:
+        gameover = False
+        starttext = False
+        startgame = False
+        
         text_width = 100  # Geschätzte Breite des Textes 
         text_height = 100 # Geschätzte Höhe des Textes 
         if not gameover and 720 < pos[0] < 720 + text_width and 650 < pos[1] < 650 + text_height: #liegt der Mausklick zwischen den positionen pos[0] und pos[1]
             screen.draw.text("Suuppii", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-            
-
+            reset_game()
+        
+def reset_game():
+    global fairy, powerupnumber, activelightning, activestar, timestar, timelightning, starcounter, distance
+    
+    fairy.life = 3
+    powerupnumber = 0
+    activelightning = False
+    activestar = False
+    timestar = 0
+    timelightning = 0
+    starcounter = 0
+    distance = 0
+    
 def gameover():
     global fairy
     screen.fill((0, 0, 0))
-    screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2), color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-    screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=60,color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    screen.draw.text(f"Punkte: {starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     fairy.life = 0
+    screen.blit("starforgametiny", (WIDTH/2 + 20, HEIGHT/2 + 60))
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
     gameover = True
