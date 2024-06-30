@@ -141,7 +141,7 @@ def draw():
     
     ghost.draw()
     
-    kostuemwechseln()
+    changecostume()
     bridge2.draw()
     bridge3.draw()
     bridge5.draw()
