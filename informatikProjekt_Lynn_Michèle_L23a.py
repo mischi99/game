@@ -426,15 +426,11 @@ def movefigure():
 def powerup_lightning():
     global activelightning, timelightning, powerupnumber
 
-    lightningfull.x = lightningfull.x - 5
-    lightningfull.bottom = min(lightningfull.bottom, 730)
-    lightningfull.top = max(lightningfull.top, 100)
+    currenttime = time.time()
 
-    currenttime = time.time() # time.time() Anzahl der Sekunden
-
-    if not activelightning and currenttime - timelightning > 10: #10 ist die zeit in Sekunden, danach kommt ein neuer powerup
+    if not activelightning and currenttime - timelightning > 5:
         lightningfull.x = 1920
-        lightningfull.y = random.randrange(HEIGHT)
+        lightningfull.y = random.randint(100, 730)
 
         activelightning = True
         timelightning = currenttime
@@ -445,38 +441,41 @@ def powerup_lightning():
         powerupnumber = powerupnumber + 1
         lightningfull.x = WIDTH - 200  # Zurücksetzen der Position des Powerups nach Kollision
 
+    lightningfull.x = lightningfull.x - 5
+    lightningfull.bottom = min(lightningfull.bottom, 730)
+    lightningfull.top = max(lightningfull.top, 100)
+
+    if lightningfull.right < 0:
+        lightningfull.x = WIDTH  # Zurücksetzen der Position des Powerups nach Kollision
+        
 def powerup_star():
-    global activestar, timestar, starcounter, stars
+    global activestar, timestar, starcounter
 
-    for star in stars:
-        star.x = star.x - 5
-        star.bottom = min(star.bottom, 730)
-        star.top = max(star.top, 100)
+    star.x = star.x - 5
+    star.bottom = min(star.bottom, 730)
+    star.top = max(star.top, 100)
 
-        currenttime = time.time()
+    currenttime = time.time()
 
-        if not activestar and currenttime - timestar > 5:
-            star.x = random.randrange(WIDTH)
-            star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+    if not activestar and currenttime - timestar > 5:
+        star.x = 1920
+        star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
 
-            activestar = True
-            timestar = currenttime
+        activestar = True
+        timestar = currenttime
 
+    if fairy.colliderect(star):
         if fairy.colliderect(star):
             activestar = False
-            star.x = random.randrange(WIDTH)
+            star.x = -100
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
+            star.x = WIDTH - 200  # Zurücksetzen der Position des Sterns nach Kollision
             star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
 
-        if star.right < 0:  # Wenn die rechte Seite des Sterns den linken Bildschirmrand überschreitet
-            star.x = WIDTH  # Setze den Stern auf die rechte Seite des Bildschirms zurück
-            star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-
-stars = [Actor("starforgametiny.png") for _ in range(4)]  # Initialize 4 stars
-for star in stars:
-    star.x = random.randrange(WIDTH)
-    star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-    
+    if star.right < 0:  # Wenn die rechte Seite des Sterns den linken Bildschirmrand überschreitet
+        star.x = WIDTH  # Setze den Stern auf die rechte Seite des Bildschirms zurück
+        star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        
 def on_mouse_down(pos):
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
     
