@@ -227,14 +227,14 @@ def draw():
         squirrelintro1.draw()
         screen.blit("firstbackground6.1", (0,0))
         speechbubbleintro1.draw()
-        screen.draw.text("Hey, Weisst du, wo\nSparky der Troll steckt?\nHast du ihn gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey, Weisst du, wo\nSparky der Troll steckt?\nHast du ihn gesehen?", left=647, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished3: 
         screen.blit("backgroundnew", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
         fairy1.draw()
         speechbubblemirrored.draw()
-        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished4:
         screen.blit("gamedirections", (0, 0))
