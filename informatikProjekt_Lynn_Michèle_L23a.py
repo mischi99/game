@@ -386,13 +386,13 @@ def changecostume():
 def movefigure():
     global jumpstart, jumping
     steps = 10
-    if keyboard.left:
+    if keyboard.left or keyboard.a:
         fairy.x = fairy.x - steps
-    if keyboard.right:
+    if keyboard.right or keyboard.d:
         fairy.x = fairy.x + steps
-    if keyboard.up:
+    if keyboard.up or keyboard.w:
         fairy.y = fairy.y - steps
-    if keyboard.down:
+    if keyboard.down or keyboard.s:
         fairy.y = fairy.y + steps
     if fairy.left < 0:
         fairy.left = 0
