@@ -77,7 +77,7 @@ bridge8.x = 2920 + 1920 + 1920
 fairy = Actor("frame-022.gif")
 fairy.x = 100
 fairy.y = 500
-fairy.leben = 3
+fairy.life = 3
 
 ghost = Actor("ghost1.png")
 ghost.x = 400
@@ -238,9 +238,9 @@ def draw():
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
 
-    if starcounter == 2:
-        startgame = False
-        gameover()
+#     if starcounter == 2:
+#         startgame = False
+#         gameover()
         
     if startgame == True:    
         if fairy.life >= 3:
@@ -262,7 +262,7 @@ def draw():
         
 def update():
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy
-    
+
     if startgame:
         movebridge()
         movebackground()
@@ -271,16 +271,7 @@ def update():
         powerup_star()
         ghostcollision(ghost)  # Hier wird die Funktion für die Kollision zwischen Fee und ghost aufgerufen
         moveghost()
-           
-#     if fairy.life > 0:
-#         herz1.draw()
-#     if fairy.life > 1:
-#         herz2.draw()
-#         herz1.draw()
-#     if fairy.life > 2:
-#         herz3.draw()
-#         herz2.draw()
-#         herz1.draw()
+
     if fairy.life < 1:
         gameover()
                 
@@ -288,7 +279,7 @@ def update():
 def ghostcollision(ghost):
     global fairy
     if fairy.colliderect(ghost):
-        fairy.leben = fairy.leben - 1
+        fairy.life = fairy.life - 1
         ghost.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
         ghost.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
         
@@ -313,7 +304,7 @@ def moveghost():
     global ghost
 
     if fairy.colliderect(ghost):
-        fairy.leben = fairy.leben - 1
+        fairy.life = fairy.life - 1
         ghost.x = random.randint(0, WIDTH)  # Setze den Geist auf eine zufällige x-Position
         ghost.y = random.randint(100, 730)  # Setze den Geist auf eine zufällige y-Position
 
@@ -545,7 +536,6 @@ def gameover():
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Punkte: {starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-    fairy.life = 0
     screen.blit("starforgametiny", (WIDTH/2 + 20, HEIGHT/2 + 60))
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
