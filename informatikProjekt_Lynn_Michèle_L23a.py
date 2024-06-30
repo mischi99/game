@@ -403,7 +403,8 @@ def movefigure():
     if fairy.bottom > HEIGHT:
         fairy.bottom = HEIGHT
         
-    fairy.bottom = min(fairy.bottom, 800)
+    fairy.bottom = min(fairy.bottom, 730)
+    fairy.top = max(fairy.top, 100)
     
 def powerup_lightning():
     global activelightning, timelightning, powerupnumber
