@@ -79,6 +79,11 @@ fairy.x = 100
 fairy.y = 500
 fairy.life = 3
 
+fairy1 = Actor("fairy1.png")
+fairy1.x = 800 
+fairy1.y = 700
+
+
 ghost = Actor("ghost1.png")
 ghost.x = 400
 ghost.y = 660
@@ -203,8 +208,7 @@ def draw():
     if not introfinished0:
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
-        screen.draw.text("Game ", left=800, top=200, fontsize=60, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("Game", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Wings of the Night", left=700, top=450, fontsize=80, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
 
     elif not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
@@ -223,18 +227,20 @@ def draw():
         squirrelintro1.draw()
         screen.blit("firstbackground6.1", (0,0))
         speechbubbleintro1.draw()
-        screen.draw.text("Hey, Weisst du,\nwo Elena die Fee steckt?\nHast du sie gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey, Weisst du,\nwo Filu der Troll steckt?\nHast du ihn gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished3: 
         screen.blit("backgroundnew", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
-        troll.draw()
+        fairy1.draw()
         speechbubblemirrored.draw()
-        screen.draw.text("Nein, ich habe sie\nnicht gesehen.\nIch gehe sie suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=515, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished4:
         screen.blit("gamedirections", (0, 0))
         screen.blit("glow", (0, 0))
+        screen.blit("glow", (50, 50))
+        screen.blit("glow", (-50, -50))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
     
