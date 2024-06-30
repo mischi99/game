@@ -99,17 +99,6 @@ star = Actor ("starforgametiny.png")
 star.x = random.randrange(WIDTH)
 star.y = random.randrange(HEIGHT)
 
-# #Herz
-# herz1 = Actor("herz1.png")
-# herz1.x = 264
-# herz1.y = 43
-# herz2 = Actor("herz1.png")
-# herz2.x = 314
-# herz2.y = 43
-# herz3 = Actor("herzgrey.png")
-# herz3.x = 364
-# herz3.y = 43
-
 activestar = False
 timestar = 0
 starcounter = 0
@@ -144,9 +133,6 @@ def draw():
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     background.draw()
     background1.draw()
-#     herz1.draw()
-#     herz2.draw()
-#     herz3.draw()
     bridge1.draw()
     bridge4.draw()
     bridge6.draw()
@@ -154,7 +140,6 @@ def draw():
     fairy.draw()
     
     ghost.draw()
-#     ghost1.draw()
     
     kostuemwechseln()
     bridge2.draw()
@@ -237,7 +222,6 @@ def draw():
         screen.blit("glow", (-50, -50))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
     
 #     if starcounter == 2:
 #         startgame = False
@@ -361,8 +345,8 @@ def movebackground():
     if background1.right < 0:
         background1.left = background.right
 
-# Kostümwechsel zwischen mensch1 und mensch2
-def kostuemwechseln():
+# Kostümwechsel animierte Fairy
+def changecostume():
     if fairy.image == "frame-033.gif":
         fairy.image = "frame-034.gif"
         time.sleep(0.1)
@@ -535,7 +519,6 @@ def reset_game():
     
 def gameover():
     global fairy, distance
-    pygame.mixer.score.stop()
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Punkte: {starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
@@ -543,8 +526,6 @@ def gameover():
     screen.blit("starforgametiny", (WIDTH/2 + 20, HEIGHT/2 + 60))
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
-    
-
     
 music()
 pgzrun.go()
