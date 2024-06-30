@@ -45,11 +45,6 @@ speechbubblet = Actor("speechbubble.png")
 speechbubblet.x = 1250
 speechbubblet.y = 500
 
-# #troll
-# troll = Actor("troll2.png")
-# troll.x = 850
-# troll.y = 740
-
 #background
 background = Actor("forestbackground.jpg")
 background.x = 0
@@ -141,7 +136,7 @@ def draw():
     
     ghost.draw()
     
-    kostuemwechseln()
+    changecostume()
     bridge2.draw()
     bridge3.draw()
     bridge5.draw()
