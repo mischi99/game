@@ -287,40 +287,44 @@ def update():
         
 def ghostcollision(ghost):
     global fairy
-    
-    ghost.x = ghost.x + 10
-    if ghost.x > HEIGHT + 350:
-        ghost.x = -200
-    
-    if ghost.colliderect(fairy):
-        fairy.life = fairy.life - 1  # Ein Leben wird abgezogen, wenn die Fee mit der ghost kollidiert
-        ghost.x = -200  # Zurücksetzen der ghostposition nach Kollision
+    if fairy.colliderect(ghost):
+        fairy.leben = fairy.leben - 1
+        ghost.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        ghost.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
         
-        if fairy.life == 3:
-            screen.blit("herz1.png", (264, 43))
-            screen.blit("herz1.png", (314, 43))
-            screen.blit("herz1.png", (364, 43))
-        elif fairy.life == 2:
-            screen.blit("herz1.png", (264, 43))
-            screen.blit("herz1.png", (314, 43))
-            screen.blit("herzgrey.png", (364, 43))
-        elif fairy.life == 1:
-            screen.blit("herz1.png", (264, 43))
-            screen.blit("herzgrey.png", (314, 43))
-            screen.blit("herzgrey.png", (364, 43))
-        elif fairy.life < 1:
-            screen.blit("herzgrey.png", (264, 43))
-            screen.blit("herzgrey.png", (314, 43))
-            screen.blit("herzgrey.png", (364, 43))
+    if fairy.life == 3:
+        screen.blit("herz1.png", (264, 43))
+        screen.blit("herz1.png", (314, 43))
+        screen.blit("herz1.png", (364, 43))
+    elif fairy.life == 2:
+        screen.blit("herz1.png", (264, 43))
+        screen.blit("herz1.png", (314, 43))
+        screen.blit("herzgrey.png", (364, 43))
+    elif fairy.life == 1:
+        screen.blit("herz1.png", (264, 43))
+        screen.blit("herzgrey.png", (314, 43))
+        screen.blit("herzgrey.png", (364, 43))
+    elif fairy.life < 1:
+        screen.blit("herzgrey.png", (264, 43))
+        screen.blit("herzgrey.png", (314, 43))
+        screen.blit("herzgrey.png", (364, 43))
 
 def moveghost():
     global ghost
-    
-    ghost.x = ghost.x - 20  # Bewege den Geist um 20 Pixel nach links
-    if ghost.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
-        ghost.left = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
-        ghost.direction = "right"  # Setze die Richtung des Geistes auf rechts
 
+    if fairy.colliderect(ghost):
+        fairy.leben = fairy.leben - 1
+        ghost.x = random.randint(0, WIDTH)  # Setze den Geist auf eine zufällige x-Position
+        ghost.y = random.randint(100, 730)  # Setze den Geist auf eine zufällige y-Position
+
+    ghost.x = ghost.x - 15
+    ghost.bottom = min(ghost.bottom, 730)
+    ghost.top = max(ghost.top, 100)
+
+    if ghost.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
+        ghost.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        ghost.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        
 def movebridge():
     global distance
     bridgespeed = 8
