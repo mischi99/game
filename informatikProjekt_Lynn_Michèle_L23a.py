@@ -237,7 +237,8 @@ def draw():
         screen.blit("glow", (0, 0))
         screen.blit("button", (WIDTH/2, HEIGHT/2))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-
+    
+    
 #     if starcounter == 2:
 #         startgame = False
 #         gameover()
@@ -260,6 +261,9 @@ def draw():
             screen.blit("herzgrey.png", (314, 43))
             screen.blit("herzgrey.png", (364, 43))    
         
+        if fairy.life == 0:
+            gameover()
+        
 def update():
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy
 
@@ -269,13 +273,12 @@ def update():
         movefigure()
         powerup_lightning()
         powerup_star()
-        ghostcollision(ghost)  # Hier wird die Funktion für die Kollision zwischen Fee und ghost aufgerufen
+        ghostcollision(ghost)  # Hier wird die Funktion für die Kollision zwischen Fee und Geist aufgerufen
         moveghost()
 
-    if fairy.life < 1:
+    if fairy.life == 0:
         gameover()
                 
-        
 def ghostcollision(ghost):
     global fairy
     if fairy.colliderect(ghost):
@@ -531,7 +534,8 @@ def reset_game():
     distance = 0
     
 def gameover():
-    global fairy
+    global fairy, distance
+    pygame.mixer.score.stop()
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Punkte: {starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
@@ -539,7 +543,8 @@ def gameover():
     screen.blit("starforgametiny", (WIDTH/2 + 20, HEIGHT/2 + 60))
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
-    gameover = True
-            
+    
+
+    
 music()
 pgzrun.go()
