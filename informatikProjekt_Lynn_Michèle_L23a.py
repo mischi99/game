@@ -8,7 +8,7 @@ import pgzrun
 
 WIDTH = 1920
 HEIGHT = 985
-TITLE = "Informatik Projekt - Designed by Lynn and Michèle"
+TITLE = "Wings of the Night - Designed by Lynn and Michèle"
 
 #squirrel
 squirrel = Actor("squirrel.png")
