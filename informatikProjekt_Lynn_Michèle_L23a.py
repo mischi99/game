@@ -2,7 +2,6 @@ import pygame.mixer
 import os
 os.environ["SDL_VIDEO_CENTERED"] = "0, 0"
 
-
 import random
 import time
 import pgzrun
@@ -83,14 +82,9 @@ fairy1 = Actor("fairy1.png")
 fairy1.x = 800 
 fairy1.y = 700
 
-
 ghost = Actor("ghost1.png")
 ghost.x = 400
 ghost.y = 660
-
-# ghost1 = Actor("ghost2.png")
-# ghost1.x = 420
-# ghost1.y = 535
 
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
