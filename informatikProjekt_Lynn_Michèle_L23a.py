@@ -227,7 +227,7 @@ def draw():
         squirrelintro1.draw()
         screen.blit("firstbackground6.1", (0,0))
         speechbubbleintro1.draw()
-        screen.draw.text("Hey, Weisst du,\nwo Filu der Troll steckt?\nHast du ihn gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Hey, Weisst du, wo\nSparky der Troll steckt?\nHast du ihn gesehen?", left=648, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished3: 
         screen.blit("backgroundnew", (0, 0))
