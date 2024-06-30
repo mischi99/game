@@ -270,7 +270,7 @@ def update():
         powerup_lightning()
         powerup_star()
         ghostcollision(ghost)  # Hier wird die Funktion für die Kollision zwischen Fee und ghost aufgerufen
-        moveghoste()
+        moveghost()
            
 #     if fairy.life > 0:
 #         herz1.draw()
@@ -312,7 +312,15 @@ def ghostcollision(ghost):
             screen.blit("herzgrey.png", (264, 43))
             screen.blit("herzgrey.png", (314, 43))
             screen.blit("herzgrey.png", (364, 43))
-            
+
+def moveghost():
+    global ghost
+    
+    ghost.x = ghost.x - 20  # Bewege den Geist um 20 Pixel nach links
+    if ghost.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
+        ghost.left = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        ghost.direction = "right"  # Setze die Richtung des Geistes auf rechts
+
 def movebridge():
     global distance
     bridgespeed = 8
@@ -415,15 +423,6 @@ def movefigure():
         
     fairy.bottom = min(fairy.bottom, 800)
     
-def moveghoste():
-    global ghost
-    
-    ghost.x -= 20  # Bewegt die ghost um 20 Pixel nach links
-    
-    if ghost.right < 0:  # Wenn die rechte Seite der ghost den linken Bildschirmrand überschreitet
-        ghost.x = WIDTH   # Setzt die ghost auf die rechte Seite des Bildschirms
-        ghost.x -= 40     # Verschiebt die ghost weiter nach links, um sicherzustellen, dass sie nicht sofort wieder den linken Bildschirmrand erreicht
-        
 def powerup_lightning():
     global activelightning, timelightning, powerupnumber
 
@@ -447,28 +446,37 @@ def powerup_lightning():
         lightningfull.x = WIDTH - 200  # Zurücksetzen der Position des Powerups nach Kollision
 
 def powerup_star():
-    global activestar, timestar, starcounter
+    global activestar, timestar, starcounter, stars
 
-    star.x = star.x - 10
-    star.bottom = min(star.bottom, 730)
-    star.top = max(star.top, 100)
+    for star in stars:
+        star.x = star.x - 5
+        star.bottom = min(star.bottom, 730)
+        star.top = max(star.top, 100)
 
-    currenttime = time.time()
+        currenttime = time.time()
 
-    if not activestar and currenttime - timestar > 5:
-        star.x = 1920
-        star.y = random.randrange(HEIGHT)
+        if not activestar and currenttime - timestar > 5:
+            star.x = random.randrange(WIDTH)
+            star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
 
-        activestar = True
-        timestar = currenttime
+            activestar = True
+            timestar = currenttime
 
-    if fairy.colliderect(star):
         if fairy.colliderect(star):
             activestar = False
-            star.x = -100
+            star.x = random.randrange(WIDTH)
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
-            star.x = WIDTH - 200  # Zurücksetzen der Position des Sterns nach Kollision
-            
+            star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+
+        if star.right < 0:  # Wenn die rechte Seite des Sterns den linken Bildschirmrand überschreitet
+            star.x = WIDTH  # Setze den Stern auf die rechte Seite des Bildschirms zurück
+            star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+
+stars = [Actor("starforgametiny.png") for _ in range(4)]  # Initialize 4 stars
+for star in stars:
+    star.x = random.randrange(WIDTH)
+    star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+    
 def on_mouse_down(pos):
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
     
