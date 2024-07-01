@@ -253,8 +253,8 @@ def draw():
             gameover()
         
 def update():
-    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, starttext, powerupnumber, gameover, fairy
-    
+    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover, fairy
+
     if startgame:
         movebridge()
         movebackground()
@@ -265,15 +265,20 @@ def update():
         moveghost()
         movebox()
 
+        if fairy.x < 0:
+            gameover()
+            return
+
     if fairy.life == 0:
         gameover()
-                
+        return
+        
 def ghostcollision(ghost):
     global fairy
     if fairy.colliderect(ghost):
         fairy.life = fairy.life - 1
         ghost.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
-        ghost.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        ghost.y = random.randint(100, 730)  # generierte ine random y-koordinate zwischen 100 und 730
         
     if fairy.life == 3:
         screen.blit("herz1.png", (264, 43))
@@ -294,7 +299,6 @@ def ghostcollision(ghost):
 
 def moveghost():
     global ghost
-
     if fairy.colliderect(ghost):
         fairy.life = fairy.life - 1
         ghost.x = random.randint(0, WIDTH)  # Setze den Geist auf eine zufällige x-Position
@@ -311,9 +315,8 @@ def moveghost():
 def movebox():
     global fairy
     if fairy.colliderect(box):
-        fairy.x = fairy.x - 50
+        fairy.x = fairy.x - 20
         
-
     box.x = box.x - 15
     box.bottom = min(box.bottom, 730)
     box.top = max(box.top, 500)
@@ -321,8 +324,7 @@ def movebox():
     if box.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
         box.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
         box.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-        
-        
+    
 def movebridge():
     global distance
     bridgespeed = 8
@@ -856,7 +858,6 @@ def changecostume1():
         time.sleep(0.1)    
            
 def movefigure():
-    global jumpstart, jumping
     steps = 10
     if keyboard.left or keyboard.a:
         fairy.x = fairy.x - steps
@@ -866,8 +867,8 @@ def movefigure():
         fairy.y = fairy.y - steps
     if keyboard.down or keyboard.s:
         fairy.y = fairy.y + steps
-    if fairy.left < 0:
-        fairy.left = 0
+#     if fairy.left < 0:
+#         fairy.left = 0
     if fairy.right > WIDTH:
         fairy.right = WIDTH
     if fairy.top < 0:
