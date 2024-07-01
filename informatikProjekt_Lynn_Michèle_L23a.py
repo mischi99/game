@@ -135,6 +135,7 @@ def draw():
     global powerupnumber, starcount, startgame
           
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
+    
     background.draw()
     background1.draw()
     bridge1.draw()
@@ -216,10 +217,10 @@ def draw():
         screen.blit("backgroundnew", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
         fairy1.draw()  
-        changecostume1()
         speechbubblemirrored.draw()
         screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
+        changecostume1()
+        
     elif not introfinished4:
         screen.blit("gamedirections", (0, 0))
         screen.blit("glow", (0, 0))
@@ -267,12 +268,10 @@ def update():
 
         if fairy.x < 0:
             gameover()
-            return
-
+           
     if fairy.life == 0:
         gameover()
-        return
-        
+               
 def ghostcollision(ghost):
     global fairy
     if fairy.colliderect(ghost):
