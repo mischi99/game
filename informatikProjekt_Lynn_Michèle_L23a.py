@@ -132,7 +132,7 @@ def music():
     pygame.mixer.music.play(-1) #spielt die geladene Musik ab, in diesem Fall unbestimmt lange. (2) würde bedeuten, das die Musik 2x hintereinander abgespielt wird
 
 def draw():
-    global powerupnumber, starcount, startgame
+    global powerupnumber, starcount, startgame, fairy
           
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     
@@ -146,7 +146,7 @@ def draw():
     
     ghost.draw()
     box.draw()
-    
+      
     changecostume()
     bridge2.draw()
     bridge3.draw()
@@ -213,12 +213,12 @@ def draw():
         speechbubbleintro1.draw()
         screen.draw.text("Hey, Weisst du, wo\nSparky der Troll steckt?\nHast du ihn gesehen?", left=647, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
-    elif not introfinished3: 
+    elif not introfinished3:
         screen.blit("backgroundnew", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
-        fairy1.draw()  
         speechbubblemirrored.draw()
-        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        fairy1.draw()
+        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color=(0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         changecostume1()
         
     elif not introfinished4:
@@ -227,7 +227,7 @@ def draw():
         screen.blit("glow", (50, 50))
         screen.blit("glow", (-50, -50))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), owidth=0.7, ocolor="white", fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
+
 #     if starcounter == 2:
 #         startgame = False
 #         gameover()
@@ -254,7 +254,7 @@ def draw():
             gameover()
         
 def update():
-    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover, fairy
+    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
 
     if startgame:
         movebridge()
@@ -268,10 +268,10 @@ def update():
 
         if fairy.x < 0:
             gameover()
-           
+
     if fairy.life == 0:
         gameover()
-               
+     
 def ghostcollision(ghost):
     global fairy
     if fairy.colliderect(ghost):
