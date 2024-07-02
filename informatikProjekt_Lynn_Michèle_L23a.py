@@ -74,21 +74,33 @@ bridge8 = Actor("bridge7.1-org.png")
 bridge8.x = 2920 + 1920 + 1920
 
 fairy = Actor("frame-022.gif")
-fairy.x = 100
-fairy.y = 500
+fairy.x = 900
+fairy.y = 450
 fairy.life = 3
 
-fairy1 = Actor("1(1).jpg")
+fairy1 = Actor("fairy1.png")
 fairy1.x = 800 
 fairy1.y = 700
 
 ghost = Actor("ghost1.png")
-ghost.x = 400
+ghost.x = 2000
 ghost.y = 660
 
 box = Actor("box11.png")
-box.x = 200
+box.x = 1100
 box.y = 560
+
+box1 = Actor("box22.png")
+box1.x = 1555
+box1.y = 360
+
+box2 = Actor("box11.png")
+box2.x = 2005
+box2.y = 360
+
+box3 = Actor("box22.png")
+box3.x = 2460
+box3.y = 360
 
 lightningfull = Actor("lightningfull.png")
 lightningfull.x = random.randrange(WIDTH)
@@ -127,12 +139,16 @@ fairy.life = 3
 #gameover
 gameover = False
 
+powerupactive = False
+
+level = 1
+
 def music():
     music = pygame.mixer.music.load('magicalFantasy.mp3') #die Musik-Datei wird geladen, damit sie anschliessend abgespielt werden kann
     pygame.mixer.music.play(-1) #spielt die geladene Musik ab, in diesem Fall unbestimmt lange. (2) würde bedeuten, das die Musik 2x hintereinander abgespielt wird
 
 def draw():
-    global powerupnumber, starcount, startgame
+    global powerupnumber, starcount, startgame, fairy
           
     screen.clear() #damit nur immer ein Bild dort ist und nicht übereindander, da sonst beim weiterdrücken ein teil des hinteren bildes noch zu sehen ist.
     
@@ -146,7 +162,10 @@ def draw():
     
     ghost.draw()
     box.draw()
-    
+    box1.draw()
+    box2.draw()
+    box3.draw()
+      
     changecostume()
     bridge2.draw()
     bridge3.draw()
@@ -178,10 +197,11 @@ def draw():
         screen.blit("lightningfull.png", (1800, 50))
         screen.draw.text("press the spacebar", left=WIDTH/2 - 180, top=HEIGHT/2, fontsize=60, color=(255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
 
-        if keyboard.space: # Wenn die Leertaste  gedrückt wird, setze die Blitzsymbole zurück
+        if keyboard.space:
+            powerupactive = True   
+            movefigureright()
             powerupnumber = 0
-            powerupactive = True
-    
+
     #anzahl eingesammelte Sternen
     star.draw()
     screen.draw.text(str(starcounter), (85, 35), fontsize=40, color=(255, 255, 255))
@@ -203,7 +223,7 @@ def draw():
         screen.blit("starforgametiny.png", (560, 390))
         screen.blit("steering", (760, 550))
         screen.draw.text("Spielanleitung", left=800, top=200, fontsize=60, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("= Leben\n= Schnelligkeitszunahme\n= Punkte zähler; Ab 100 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("= Leben\n= Schnelligkeitszunahme\n= Punkte zähler; Ab 50 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: 
         screen.blit("firstbackground6", (0, 0))
@@ -213,12 +233,12 @@ def draw():
         speechbubbleintro1.draw()
         screen.draw.text("Hey, Weisst du, wo\nSparky der Troll steckt?\nHast du ihn gesehen?", left=647, top=545, fontsize=22, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         
-    elif not introfinished3: 
+    elif not introfinished3:
         screen.blit("backgroundnew", (0, 0))
         screen.blit("arrowwhite", (1770, 835))
-        fairy1.draw()  
         speechbubblemirrored.draw()
-        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color= (0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
+        fairy1.draw()
+        screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color=(0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
         changecostume1()
         
     elif not introfinished4:
@@ -227,7 +247,7 @@ def draw():
         screen.blit("glow", (50, 50))
         screen.blit("glow", (-50, -50))
         screen.draw.text("Starten", left=WIDTH/2, top=HEIGHT/2, fontsize=40, color= (0,0,0), owidth=0.7, ocolor="white", fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-    
+
 #     if starcounter == 2:
 #         startgame = False
 #         gameover()
@@ -254,7 +274,7 @@ def draw():
             gameover()
         
 def update():
-    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover, fairy
+    global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
 
     if startgame:
         movebridge()
@@ -265,13 +285,23 @@ def update():
         ghostcollision(ghost)  # Hier wird die Funktion für die Kollision zwischen Fee und Geist aufgerufen
         moveghost()
         movebox()
+        movebox1()
+        movebox2()
+        movebox3()
 
-        if fairy.x < 0:
-            gameover()
-           
     if fairy.life == 0:
         gameover()
-               
+        
+    if powerupactive == True:  
+        movefigureright()
+    
+    if fairy.x <= 0:
+        fairy.life =  fairy.life - 3
+        
+def movefigureright():
+    if keyboard.right or keyboard.d:
+                fairy.x = fairy.x + 10
+                
 def ghostcollision(ghost):
     global fairy
     if fairy.colliderect(ghost):
@@ -303,13 +333,13 @@ def moveghost():
         ghost.x = random.randint(0, WIDTH)  # Setze den Geist auf eine zufällige x-Position
         ghost.y = random.randint(100, 730)  # Setze den Geist auf eine zufällige y-Position
 
-    ghost.x = ghost.x - 15
-    ghost.bottom = min(ghost.bottom, 730)
+    ghost.x = ghost.x - 18
+    ghost.bottom = min(ghost.bottom, 630)
     ghost.top = max(ghost.top, 100)
 
     if ghost.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
         ghost.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
-        ghost.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        ghost.y = random.randint(100, 630)  # Generate a random y-coordinate between 100 and 730
 
 def movebox():
     global fairy
@@ -317,16 +347,55 @@ def movebox():
         fairy.x = fairy.x - 20
         
     box.x = box.x - 15
-    box.bottom = min(box.bottom, 730)
-    box.top = max(box.top, 500)
+    box.bottom = min(box.bottom, 480)
+    box.top = max(box.top, 480)
 
     if box.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
         box.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
         box.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-    
+        
+def movebox1():
+    global fairy
+    if fairy.colliderect(box1):
+        fairy.x = fairy.x - 20
+        
+    box1.x = box1.x - 15
+    box1.bottom = min(box1.bottom, 580)
+    box1.top = max(box1.top, 580)
+
+    if box1.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
+        box1.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        box1.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        
+def movebox2():
+    global fairy
+    if fairy.colliderect(box2):
+        fairy.x = fairy.x - 20
+        
+    box2.x = box2.x - 15
+    box2.bottom = min(box2.bottom, 280)
+    box2.top = max(box2.top, 280)
+
+    if box2.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
+        box2.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        box2.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        
+def movebox3():
+    global fairy
+    if fairy.colliderect(box3):
+        fairy.x = fairy.x - 20
+        
+    box3.x = box3.x - 15
+    box3.bottom = min(box3.bottom, 380)
+    box3.top = max(box3.top, 380)
+
+    if box3.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
+        box3.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        box3.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        
 def movebridge():
     global distance
-    bridgespeed = 8
+    bridgespeed = 10
     bridge1.x = bridge1.x - bridgespeed
     bridge2.x = bridge2.x - bridgespeed
     bridge3.x = bridge3.x - bridgespeed
@@ -357,7 +426,7 @@ def movebridge():
         bridge8.left = bridge5.right
            
 def movebackground():
-    speedbackground = 8
+    speedbackground = 10
     background.x = background.x - speedbackground
     background1.x = background1.x - speedbackground
     
@@ -857,11 +926,11 @@ def changecostume1():
         time.sleep(0.1)    
            
 def movefigure():
-    steps = 10
-    if keyboard.left or keyboard.a:
-        fairy.x = fairy.x - steps
-    if keyboard.right or keyboard.d:
-        fairy.x = fairy.x + steps
+    steps = 40
+#     if keyboard.left or keyboard.a:
+#         fairy.x = fairy.x - steps
+#     if keyboard.right or keyboard.d:
+#         fairy.x = fairy.x + steps
     if keyboard.up or keyboard.w:
         fairy.y = fairy.y - steps
     if keyboard.down or keyboard.s:
@@ -885,7 +954,7 @@ def powerup_lightning():
 
     if not activelightning and currenttime - timelightning > 5:
         lightningfull.x = 1920
-        lightningfull.y = random.randint(100, 730)
+        lightningfull.y = random.randint(100, 630)
 
         activelightning = True
         timelightning = currenttime
@@ -896,8 +965,8 @@ def powerup_lightning():
         powerupnumber = powerupnumber + 1
         lightningfull.x = WIDTH - 200  # Zurücksetzen der Position des Powerups nach Kollision
 
-    lightningfull.x = lightningfull.x - 5
-    lightningfull.bottom = min(lightningfull.bottom, 730)
+    lightningfull.x = lightningfull.x - 20
+    lightningfull.bottom = min(lightningfull.bottom, 630)
     lightningfull.top = max(lightningfull.top, 100)
 
     if lightningfull.right < 0:
@@ -906,7 +975,7 @@ def powerup_lightning():
 def powerup_star():
     global activestar, timestar, starcounter
 
-    star.x = star.x - 5
+    star.x = star.x - 15
     star.bottom = min(star.bottom, 730)
     star.top = max(star.top, 100)
 
@@ -915,7 +984,7 @@ def powerup_star():
     if not activestar and currenttime - timestar > 5:
         star.x = 1920
         star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-
+    
         activestar = True
         timestar = currenttime
 
@@ -926,11 +995,11 @@ def powerup_star():
             starcounter = starcounter + 1  # Erhöhe die Sternanzahl um 1, wenn ein Stern eingesammelt wird
             star.x = WIDTH - 200  # Zurücksetzen der Position des Sterns nach Kollision
             star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-
+            
     if star.right < 0:  # Wenn die rechte Seite des Sterns den linken Bildschirmrand überschreitet
         star.x = WIDTH  # Setze den Stern auf die rechte Seite des Bildschirms zurück
         star.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
-        
+
 def on_mouse_down(pos):
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
     
@@ -997,6 +1066,9 @@ def gameover():
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
+    
+    if starcounter >= 1:
+        screen.draw.text("Level Up!", (WIDTH/2 - 50, HEIGHT/2 - 300), fontsize=30, color=(0, 150, 255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     
 music()
 pgzrun.go()
