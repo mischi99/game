@@ -240,7 +240,7 @@ def draw():
         speechbubblemirrored.draw()
         fairy1.draw()
         screen.draw.text("Nein, ich habe ihn\nnicht gesehen.\nIch gehe ihn suchen!\n", left=514, top=550, fontsize=23, color=(0,0,0), fontname="..\\fonts\\handlee-regular.ttf", align="left") #\n macht einen Brake (Zeilenumbruch) in den text
-        changecostume1()
+#         changecostume1()
         
     elif not introfinished4:
         screen.blit("gamedirections", (0, 0))
@@ -340,9 +340,9 @@ def moveghost():
     ghost.bottom = min(ghost.bottom, 630)
     ghost.top = max(ghost.top, 100)
 
-    if ghost.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
-        ghost.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
-        ghost.y = random.randint(100, 630)  # Generate a random y-coordinate between 100 and 730
+    if ghost.right < 0: # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
+        ghost.x = WIDTH # Setze den Geist auf die rechte Seite des Bildschirms zurück
+        ghost.y = random.randint(100, 630) # Generiert eine random y-Koordinate zwischen 100 und 730
 
 def movebox():
     global fairy
@@ -355,7 +355,7 @@ def movebox():
 
     if box.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
         box.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
-        box.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        box.y = random.randint(100, 730)  # Generiert eine random y-Koordinate zwischen 100 und 730
         
 def movebox1():
     global fairy
@@ -368,7 +368,7 @@ def movebox1():
 
     if box1.right < 0:  # Wenn die rechte Seite des Geistes den linken Bildschirmrand überschreitet
         box1.x = WIDTH  # Setze den Geist auf die rechte Seite des Bildschirms zurück
-        box1.y = random.randint(100, 730)  # Generate a random y-coordinate between 100 and 730
+        box1.y = random.randint(580, 580)  # Generate a random y-coordinate between 100 and 730
         
 def movebox2():
     global fairy
@@ -476,458 +476,458 @@ def changecostume():
         fairy.image = "frame-033.gif"
         time.sleep(0.1)
         
-def changecostume1():
-    if fairy.image == "1(1).jpg":
-        fairy.image = "1(2).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(2).jpg":
-        fairy.image = "1(3).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(3).jpg":
-        fairy.image = "1(4).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(4).jpg":
-        fairy.image = "1(5).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(5).jpg":
-        fairy.image = "1(6).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(6).jpg":
-        fairy.image = "1(7).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(7).jpg":
-        fairy.image = "1(8).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(8).jpg":
-        fairy.image = "1(9).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(9).jpg":
-        fairy.image = "1(10).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(10).jpg":
-        fairy.image = "1(11).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(11).jpg":
-        fairy.image = "1(12).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(12).jpg":
-        fairy.image = "1(13).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(13).jpg":
-        fairy.image = "1(14).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(14).jpg":
-        fairy.image = "1(15).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(15).jpg":
-        fairy.image = "1(16).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(16).jpg":
-        fairy.image = "1(17).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(17).jpg":
-        fairy.image = "1(18).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(18).jpg":
-        fairy.image = "1(19).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(19).jpg":
-        fairy.image = "1(20).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(20).jpg":
-        fairy.image = "1(21).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(21).jpg":
-        fairy.image = "1(22).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(22).jpg":
-        fairy.image = "1(23).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(23).jpg":
-        fairy.image = "1(24).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(24).jpg":
-        fairy.image = "1(25).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(25).jpg":
-        fairy.image = "1(26).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(26).jpg":
-        fairy.image = "1(27).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(27).jpg":
-        fairy.image = "1(28).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(28).jpg":
-        fairy.image = "1(29).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(29).jpg":
-        fairy.image = "1(30).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(30).jpg":
-        fairy.image = "1(31).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(31).jpg":
-        fairy.image = "1(32).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(32).jpg":
-        fairy.image = "1(33).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(33).jpg":
-        fairy.image = "1(34).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(34).jpg":
-        fairy.image = "1(35).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(35).jpg":
-        fairy.image = "1(36).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(36).jpg":
-        fairy.image = "1(37).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(37).jpg":
-        fairy.image = "1(38).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(38).jpg":
-        fairy.image = "1(39).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(39).jpg":
-        fairy.image = "1(40).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(40).jpg":
-        fairy.image = "1(41).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(41).jpg":
-        fairy.image = "1(42).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(42).jpg":
-        fairy.image = "1(43).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(43).jpg":
-        fairy.image = "1(44).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(44).jpg":
-        fairy.image = "1(45).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(45).jpg":
-        fairy.image = "1(46).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(46).jpg":
-        fairy.image = "1(47).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(47).jpg":
-        fairy.image = "1(48).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(48).jpg":
-        fairy.image = "1(49).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(49).jpg":
-        fairy.image = "1(50).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(50).jpg":
-        fairy.image = "1(51).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(51).jpg":
-        fairy.image = "1(52).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(52).jpg":
-        fairy.image = "1(53).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(53).jpg":
-        fairy.image = "1(54).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(54).jpg":
-        fairy.image = "1(55).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(55).jpg":
-        fairy.image = "1(56).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(56).jpg":
-        fairy.image = "1(57).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(57).jpg":
-        fairy.image = "1(58).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(58).jpg":
-        fairy.image = "1(59).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(59).jpg":
-        fairy.image = "1(60).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(60).jpg":
-        fairy.image = "1(61).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(61).jpg":
-        fairy.image = "1(62).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(62).jpg":
-        fairy.image = "1(63).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(63).jpg":
-        fairy.image = "1(64).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(64).jpg":
-        fairy.image = "1(65).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(65).jpg":
-        fairy.image = "1(66).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(66).jpg":
-        fairy.image = "1(67).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(67).jpg":
-        fairy.image = "1(68).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(68).jpg":
-        fairy.image = "1(69).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(69).jpg":
-        fairy.image = "1(70).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(70).jpg":
-        fairy.image = "1(71).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(71).jpg":
-        fairy.image = "1(72).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(72).jpg":
-        fairy.image = "1(73).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(73).jpg":
-        fairy.image = "1(74).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(74).jpg":
-        fairy.image = "1(75).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(75).jpg":
-        fairy.image = "1(76).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(76).jpg":
-        fairy.image = "1(77).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(77).jpg":
-        fairy.image = "1(78).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(78).jpg":
-        fairy.image = "1(79).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(79).jpg":
-        fairy.image = "1(80).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(80).jpg":
-        fairy.image = "1(81).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(81).jpg":
-        fairy.image = "1(82).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(82).jpg":
-        fairy.image = "1(83).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(83).jpg":
-        fairy.image = "1(84).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(84).jpg":
-        fairy.image = "1(85).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(85).jpg":
-        fairy.image = "1(86).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(86).jpg":
-        fairy.image = "1(87).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(87).jpg":
-        fairy.image = "1(88).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(88).jpg":
-        fairy.image = "1(89).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(89).jpg":
-        fairy.image = "1(90).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(90).jpg":
-        fairy.image = "1(91).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(91).jpg":
-        fairy.image = "1(92).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(92).jpg":
-        fairy.image = "1(93).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(93).jpg":
-        fairy.image = "1(94).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(94).jpg":
-        fairy.image = "1(95).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(95).jpg":
-        fairy.image = "1(96).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(96).jpg":
-        fairy.image = "1(97).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(97).jpg":
-        fairy.image = "1(98).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(98).jpg":
-        fairy.image = "1(99).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(99).jpg":
-        fairy.image = "1(100).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(100).jpg":
-        fairy.image = "1(101).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(101).jpg":
-        fairy.image = "1(102).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(102).jpg":
-        fairy.image = "1(103).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(103).jpg":
-        fairy.image = "1(104).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(104).jpg":
-        fairy.image = "1(105).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(105).jpg":
-        fairy.image = "1(106).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(106).jpg":
-        fairy.image = "1(107).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(107).jpg":
-        fairy.image = "1(108).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(108).jpg":
-        fairy.image = "1(109).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(109).jpg":
-        fairy.image = "1(110).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(110).jpg":
-        fairy.image = "1(111).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(111).jpg":
-        fairy.image = "1(112).jpg"
-        time.sleep(0.1)
-        
-    elif fairy.image == "1(112).jpg":
-        fairy.image = "1(113).jpg"
-        time.sleep(0.1)
-    else:
-        fairy.image = "1(1).jpg"
-        time.sleep(0.1)    
-           
+# def changecostume1():
+#     if fairy.image == "1(1).jpg":
+#         fairy.image = "1(2).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(2).jpg":
+#         fairy.image = "1(3).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(3).jpg":
+#         fairy.image = "1(4).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(4).jpg":
+#         fairy.image = "1(5).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(5).jpg":
+#         fairy.image = "1(6).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(6).jpg":
+#         fairy.image = "1(7).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(7).jpg":
+#         fairy.image = "1(8).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(8).jpg":
+#         fairy.image = "1(9).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(9).jpg":
+#         fairy.image = "1(10).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(10).jpg":
+#         fairy.image = "1(11).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(11).jpg":
+#         fairy.image = "1(12).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(12).jpg":
+#         fairy.image = "1(13).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(13).jpg":
+#         fairy.image = "1(14).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(14).jpg":
+#         fairy.image = "1(15).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(15).jpg":
+#         fairy.image = "1(16).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(16).jpg":
+#         fairy.image = "1(17).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(17).jpg":
+#         fairy.image = "1(18).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(18).jpg":
+#         fairy.image = "1(19).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(19).jpg":
+#         fairy.image = "1(20).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(20).jpg":
+#         fairy.image = "1(21).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(21).jpg":
+#         fairy.image = "1(22).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(22).jpg":
+#         fairy.image = "1(23).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(23).jpg":
+#         fairy.image = "1(24).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(24).jpg":
+#         fairy.image = "1(25).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(25).jpg":
+#         fairy.image = "1(26).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(26).jpg":
+#         fairy.image = "1(27).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(27).jpg":
+#         fairy.image = "1(28).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(28).jpg":
+#         fairy.image = "1(29).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(29).jpg":
+#         fairy.image = "1(30).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(30).jpg":
+#         fairy.image = "1(31).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(31).jpg":
+#         fairy.image = "1(32).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(32).jpg":
+#         fairy.image = "1(33).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(33).jpg":
+#         fairy.image = "1(34).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(34).jpg":
+#         fairy.image = "1(35).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(35).jpg":
+#         fairy.image = "1(36).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(36).jpg":
+#         fairy.image = "1(37).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(37).jpg":
+#         fairy.image = "1(38).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(38).jpg":
+#         fairy.image = "1(39).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(39).jpg":
+#         fairy.image = "1(40).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(40).jpg":
+#         fairy.image = "1(41).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(41).jpg":
+#         fairy.image = "1(42).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(42).jpg":
+#         fairy.image = "1(43).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(43).jpg":
+#         fairy.image = "1(44).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(44).jpg":
+#         fairy.image = "1(45).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(45).jpg":
+#         fairy.image = "1(46).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(46).jpg":
+#         fairy.image = "1(47).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(47).jpg":
+#         fairy.image = "1(48).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(48).jpg":
+#         fairy.image = "1(49).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(49).jpg":
+#         fairy.image = "1(50).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(50).jpg":
+#         fairy.image = "1(51).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(51).jpg":
+#         fairy.image = "1(52).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(52).jpg":
+#         fairy.image = "1(53).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(53).jpg":
+#         fairy.image = "1(54).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(54).jpg":
+#         fairy.image = "1(55).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(55).jpg":
+#         fairy.image = "1(56).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(56).jpg":
+#         fairy.image = "1(57).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(57).jpg":
+#         fairy.image = "1(58).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(58).jpg":
+#         fairy.image = "1(59).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(59).jpg":
+#         fairy.image = "1(60).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(60).jpg":
+#         fairy.image = "1(61).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(61).jpg":
+#         fairy.image = "1(62).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(62).jpg":
+#         fairy.image = "1(63).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(63).jpg":
+#         fairy.image = "1(64).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(64).jpg":
+#         fairy.image = "1(65).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(65).jpg":
+#         fairy.image = "1(66).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(66).jpg":
+#         fairy.image = "1(67).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(67).jpg":
+#         fairy.image = "1(68).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(68).jpg":
+#         fairy.image = "1(69).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(69).jpg":
+#         fairy.image = "1(70).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(70).jpg":
+#         fairy.image = "1(71).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(71).jpg":
+#         fairy.image = "1(72).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(72).jpg":
+#         fairy.image = "1(73).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(73).jpg":
+#         fairy.image = "1(74).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(74).jpg":
+#         fairy.image = "1(75).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(75).jpg":
+#         fairy.image = "1(76).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(76).jpg":
+#         fairy.image = "1(77).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(77).jpg":
+#         fairy.image = "1(78).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(78).jpg":
+#         fairy.image = "1(79).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(79).jpg":
+#         fairy.image = "1(80).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(80).jpg":
+#         fairy.image = "1(81).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(81).jpg":
+#         fairy.image = "1(82).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(82).jpg":
+#         fairy.image = "1(83).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(83).jpg":
+#         fairy.image = "1(84).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(84).jpg":
+#         fairy.image = "1(85).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(85).jpg":
+#         fairy.image = "1(86).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(86).jpg":
+#         fairy.image = "1(87).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(87).jpg":
+#         fairy.image = "1(88).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(88).jpg":
+#         fairy.image = "1(89).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(89).jpg":
+#         fairy.image = "1(90).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(90).jpg":
+#         fairy.image = "1(91).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(91).jpg":
+#         fairy.image = "1(92).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(92).jpg":
+#         fairy.image = "1(93).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(93).jpg":
+#         fairy.image = "1(94).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(94).jpg":
+#         fairy.image = "1(95).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(95).jpg":
+#         fairy.image = "1(96).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(96).jpg":
+#         fairy.image = "1(97).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(97).jpg":
+#         fairy.image = "1(98).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(98).jpg":
+#         fairy.image = "1(99).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(99).jpg":
+#         fairy.image = "1(100).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(100).jpg":
+#         fairy.image = "1(101).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(101).jpg":
+#         fairy.image = "1(102).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(102).jpg":
+#         fairy.image = "1(103).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(103).jpg":
+#         fairy.image = "1(104).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(104).jpg":
+#         fairy.image = "1(105).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(105).jpg":
+#         fairy.image = "1(106).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(106).jpg":
+#         fairy.image = "1(107).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(107).jpg":
+#         fairy.image = "1(108).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(108).jpg":
+#         fairy.image = "1(109).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(109).jpg":
+#         fairy.image = "1(110).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(110).jpg":
+#         fairy.image = "1(111).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(111).jpg":
+#         fairy.image = "1(112).jpg"
+#         time.sleep(0.1)
+#         
+#     elif fairy.image == "1(112).jpg":
+#         fairy.image = "1(113).jpg"
+#         time.sleep(0.1)
+#     else:
+#         fairy.image = "1(1).jpg"
+#         time.sleep(0.1)    
+#            
 def movefigure():
     steps = 40
 #     if keyboard.left or keyboard.a:
@@ -1065,8 +1065,9 @@ def gameover():
     global fairy, distance
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-    screen.draw.text(f"Punkte: {starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    screen.draw.text(f"{starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
+    screen.blit("starforgametiny", (980,510))
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
     
