@@ -214,6 +214,7 @@ def draw():
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
         screen.blit("arrowblack", (1770, 835))
         screen.draw.text("Wings of the Night", left=700, top=450, fontsize=80, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("Von: Michèle und Lynn", left=825, top=550, fontsize=40, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished1: #prüft ob not introfinished1 gleich false ist, was in diesem Fall stimmt --> not introfinished1 wird zu True - und - = + daher wird der Code ausgeführt
         screen.fill((0, 0, 0)) #füllt hintergrund schwarz aus
@@ -223,7 +224,7 @@ def draw():
         screen.blit("starforgametiny.png", (560, 390))
         screen.blit("steering", (760, 550))
         screen.draw.text("Spielanleitung", left=800, top=200, fontsize=60, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
-        screen.draw.text("= Leben\n= Schnelligkeitszunahme\n= Punkte zähler; Ab 50 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
+        screen.draw.text("= Leben\n= Schnelligkeitszunahme\n= Punkte zähler; Ab 50 Punkten gibt es ein Level up\nSteuerung mit den Pfeilen\nKisten = Man wird nach hinten geschoben\nGeister = ein Herz weniger", left=620, top=300, fontsize=35, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center") #\n macht einen Brake (Zeilenumbruch) in den text
         
     elif not introfinished2: 
         screen.blit("firstbackground6", (0, 0))
@@ -1069,7 +1070,7 @@ def gameover():
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
     
-    if starcounter >= 1:
+    if starcounter >= 50:
         screen.draw.text("Level Up!", (WIDTH/2 - 50, HEIGHT/2 - 300), fontsize=30, color=(0, 150, 255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     
 music()
