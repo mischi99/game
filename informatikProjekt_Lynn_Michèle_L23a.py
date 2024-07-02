@@ -1062,7 +1062,9 @@ def reset_game():
     distance = 0
     
 def gameover():
-    global fairy, distance
+    print("gameover")
+    global fairy, distance, introfinished0
+    
     screen.fill((0, 0, 0))
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"{starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
@@ -1073,6 +1075,7 @@ def gameover():
     
     if starcounter >= 50:
         screen.draw.text("Level Up!", (WIDTH/2 - 50, HEIGHT/2 - 300), fontsize=30, color=(0, 150, 255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-    
+    time.sleep(2)
+    introfinished0 = False 
 music()
 pgzrun.go()
