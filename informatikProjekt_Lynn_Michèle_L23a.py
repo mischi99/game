@@ -254,21 +254,21 @@ def draw():
         
     if startgame == True:    
         if fairy.life >= 3:
-            screen.blit("herz1.png", (264, 43))
-            screen.blit("herz1.png", (314, 43))
-            screen.blit("herz1.png", (364, 43))
+            screen.blit("herz1.png", (264, 30))
+            screen.blit("herz1.png", (314, 30))
+            screen.blit("herz1.png", (364, 30))
         elif fairy.life == 2:
-            screen.blit("herz1.png", (264, 43))
-            screen.blit("herz1.png", (314, 43))
-            screen.blit("herzgrey.png", (364, 43))
+            screen.blit("herz1.png", (264, 30))
+            screen.blit("herz1.png", (314, 30))
+            screen.blit("herzgrey.png", (364, 30))
         elif fairy.life == 1:
-            screen.blit("herz1.png", (264, 43))
-            screen.blit("herzgrey.png", (314, 43))
-            screen.blit("herzgrey.png", (364, 43))
+            screen.blit("herz1.png", (264, 30))
+            screen.blit("herzgrey.png", (314, 30))
+            screen.blit("herzgrey.png", (364, 30))
         elif fairy.life <= 0:
-            screen.blit("herzgrey.png", (264, 43))
-            screen.blit("herzgrey.png", (314, 43))
-            screen.blit("herzgrey.png", (364, 43))    
+            screen.blit("herzgrey.png", (264, 30))
+            screen.blit("herzgrey.png", (314, 30))
+            screen.blit("herzgrey.png", (364, 30))    
         
         if fairy.life == 0:
             gameover()
@@ -312,21 +312,21 @@ def ghostcollision(ghost):
         ghost.y = random.randint(100, 730)  # generierte ine random y-koordinate zwischen 100 und 730
         
     if fairy.life == 3:
-        screen.blit("herz1.png", (264, 43))
-        screen.blit("herz1.png", (314, 43))
-        screen.blit("herz1.png", (364, 43))
+        screen.blit("herz1.png", (264, 30))
+        screen.blit("herz1.png", (314, 30))
+        screen.blit("herz1.png", (364, 30))
     elif fairy.life == 2:
-        screen.blit("herz1.png", (264, 43))
-        screen.blit("herz1.png", (314, 43))
-        screen.blit("herzgrey.png", (364, 43))
+        screen.blit("herz1.png", (264, 30))
+        screen.blit("herz1.png", (314, 30))
+        screen.blit("herzgrey.png", (364, 30))
     elif fairy.life == 1:
-        screen.blit("herz1.png", (264, 43))
-        screen.blit("herzgrey.png", (314, 43))
-        screen.blit("herzgrey.png", (364, 43))
+        screen.blit("herz1.png", (264, 30))
+        screen.blit("herzgrey.png", (314, 30))
+        screen.blit("herzgrey.png", (364, 30))
     elif fairy.life < 1:
-        screen.blit("herzgrey.png", (264, 43))
-        screen.blit("herzgrey.png", (314, 43))
-        screen.blit("herzgrey.png", (364, 43))
+        screen.blit("herzgrey.png", (264, 30))
+        screen.blit("herzgrey.png", (314, 30))
+        screen.blit("herzgrey.png", (364, 30))
 
 def moveghost():
     global ghost
@@ -1066,7 +1066,6 @@ def gameover():
     screen.draw.text("Game Over", center=(WIDTH/2, HEIGHT/2 - 100), fontsize=70, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Punkte: {starcounter}", center=(WIDTH/2, HEIGHT/2 + 50), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
     screen.draw.text(f"Score: {distance/100} meters", center=(WIDTH/2, HEIGHT/2 + 100), fontsize=50, color= (255,255,255), fontname="..\\fonts\\handlee-regular.ttf", align="center")
-    screen.blit("starforgametiny", (WIDTH/2 + 20, HEIGHT/2 + 60))
     screen.blit("replay", (720, 650))
     screen.blit("arrowblack", (1200, 650))
     
