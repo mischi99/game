@@ -272,6 +272,8 @@ def draw():
         
         if fairy.life == 0:
             gameover()
+    if fairy.life == 0:
+        gameover()
         
 def update():
     global introfinished0, introfinished1, introfinished2, introfinished3, introfinished4, startgame, gameover
